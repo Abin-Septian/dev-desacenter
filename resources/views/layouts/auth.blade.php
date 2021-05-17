@@ -10,7 +10,7 @@
     <title>{{ $title }}</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/dsc_logo.png">
-    <!-- Custom Stylesheet -->
+    <!-- Custom Stylesheet - Redesign UI --->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     
 </head>
