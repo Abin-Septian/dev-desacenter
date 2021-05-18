@@ -85,7 +85,7 @@
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="fas fa-chart-line"></i> POTENSI DESA KEDEPAN</h6>
                             <div class="iconbox-content-body">
-                                <p>Penjelasan singkat</p>
+                                <p >Penjelasan singkat</p>
                                 <a class="btn btn-inline read-more-btn" href="#"><i class="fas fa-plus-square"></i> Read More</a>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Responsive Design</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Very Easy Customize</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Free Font Icons</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Mobile Ready</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Modern Style</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Awesome Support</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -262,7 +262,7 @@
                         <div class="section-title">
                             <h4>Working With Us</h4>
                         </div>
-                        <p>We’ve completed more than <span>100+</span>project for our am azing clients, If you interested?</p>
+                        <p class="text-muted">We’ve completed more than <span>100+</span>project for our am azing clients, If you interested?</p>
                         <a href="#" class="btn hire-us-btn">Hire Us</a>
                     </div>
                 </div>
