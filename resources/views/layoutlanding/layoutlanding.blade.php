@@ -164,7 +164,7 @@
             </ul>
           </div>
         </div>
-    <footer class="footer-area pt-60 pb-60 black-bg" id="contact-us">
+    <footer class="footer-area pt-60 pb-60 blue-bg" id="contact-us">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
