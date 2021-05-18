@@ -31,9 +31,9 @@ return [
     ],
 
     'google' => [
-        'client_id' => '1032621262714-vs3kjl90dmomlri8cnrdmphmvj2gnsr0.apps.googleusercontent.com',
-        'client_secret' => 'RsBDBBLq6uAjVh9uu_f7W8cn',
-        'redirect' => 'http://127.0.0.1:8000/google/callback',
+        'client_id' => '657679982456-g38hu8a5saopa5rn555iic2sou2re4p3.apps.googleusercontent.com',
+        'client_secret' => 'etT7n_8K6t08uxt9nMTHwgcG',
+        'redirect' => 'https://dev.desacenter.id/google/callback',
     ],
 
 ];
