@@ -14,14 +14,14 @@
                             <div class="slider-inner">
                                 <!-- <h1>WELCOME TO BE-ONE</h1>
                                 ><h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa cum sociic</h5> -->
-                                <a class="btn get-started-btn rounded" href="#">Get Started</a>
+                                <a class="btn get-started-btn rounded" href="{{ url('login') }}">Get Started</a>
                             </div>
                         </div>
                         <div class="single-slider slider-bg-2 text-center">
                             <div class="slider-inner">
                                 <!-- <h1>Free MULTIPURPSE TEMPLATE</h1>
 								<h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis n</h5 -->
->                                <a class="btn get-started-btn rounded"  href="#">Get Started</a>
+>                                <a class="btn get-started-btn rounded"  href="{{ url('login') }}">Get Started</a>
                             </div>
                         </div>
                         <!-- <div class="single-slider slider-bg-3 text-center">
@@ -48,7 +48,7 @@
                     </div>  
                 </div>
                 <div class="col-lg-3 col-md-3  offset-lg-2 col-12 text-right">
-                    <a class="btn hire-us-button" href="">Bergabung</a>
+                    <a class="btn hire-us-button" href="{{ url('login') }}">Bergabung</a>
                 </div>
             </div>
         </div>
