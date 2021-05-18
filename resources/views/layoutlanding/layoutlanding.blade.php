@@ -53,9 +53,9 @@
                     right: 10px;
                     bottom: 10px;
                 }
-    .btnlogin{
-    
-        border-radius: 30px;
+    #btnlogin{
+        
+        border-radius: 15px 15px 15px 15px; 
     }
     .video-container {
     overflow: hidden;
@@ -132,7 +132,7 @@
                                 <li><a href="#page">Pages</a></li>
                                 <li><a href="#blog">Blog</a></li>
                                 <li><a href="#contact-us">Contact Us</a></li>
-                                <li> <a class="btn rounded btnlogin p-3 " id="btnlogin" href="{{ url('login/') }}">DAFTAR / BERGABUNG</a> </li>
+                                <li> <a class="btn p-3 " id="btnlogin" href="{{ url('login/') }}">DAFTAR / BERGABUNG</a> </li>
                                
                             </ul>
                         </nav>
