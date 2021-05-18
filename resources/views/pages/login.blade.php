@@ -8,7 +8,7 @@
                 <div class="col-xl-4">
                     <div class="login-info">
                         <h2>Majukan Desa bersama kami xxx</h2>
-                        <p class="mb-5">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country in which roasted parts of sentences fly into your mouth.</p>
+                        <p class="mb-5">A small river named Duden flos,d sdws by their place and supplies it with the necessary regelialia. It is a paradisematic country in which roasted parts of sentences fly into your mouth.</p>
                         <h5>Ph: +62812 34567890</h5>
                         <h5>Email: hello@example.com</h5>
                     </div>
