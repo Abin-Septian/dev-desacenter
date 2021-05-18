@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-icon-box icon-box-img-2">
+                    <div class="single-icon-box icon-box-img-2 card" id="rcard">
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="fas fa-cogs"></i> BAGAIMANA CARA BERGABUNG DENGAN KAMI</h6>
                             <div class="iconbox-content-body">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-icon-box icon-box-img-3">
+                    <div class="single-icon-box icon-box-img-3 card" id="rcard">
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="fas fa-chart-line"></i> POTENSI DESA KEDEPAN</h6>
                             <div class="iconbox-content-body">
