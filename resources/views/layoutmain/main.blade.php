@@ -177,7 +177,7 @@
     </div>
     <!-- End We are Bemax Area -->
     <!-- Start Latest Project Area -->
-    <div class="latest-project-area black-bg pt-70 pb-70" id="portfolio">
+    <div class="latest-project-area blue-bg pt-70 pb-70" id="portfolio">
         <div class="container">
         <div class="row">
                 <div class="col-lg-12 text-center mb-70">

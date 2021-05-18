@@ -505,6 +505,10 @@
 .black {
 	color: #222;
 }
+
+.blue-bg{
+    background-color: #00498f;
+}
 /* black overlay */
 
 [data-overlay] {
