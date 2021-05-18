@@ -6,13 +6,13 @@ $(document).ready(function(){
     
 
     const firebaseConfig = {
-        apiKey: "AIzaSyCbJs_Ge0j5yhF7u0_Kk-NEA7vvOvqCgQs",
-        authDomain: "srikandi-superaps.firebaseapp.com",
-        projectId: "srikandi-superaps",
-        storageBucket: "srikandi-superaps.appspot.com",
-        messagingSenderId: "318109044738",
-        appId: "1:318109044738:web:36560b8c9ea8dab584971b",
-        measurementId: "G-G487FMFJC1"
+        apiKey: "AIzaSyAnFw2cck0mhVurHRkS9YFoBac-A80-bco",
+        authDomain: "desacenter-41018.firebaseapp.com",
+        projectId: "desacenter-41018",
+        storageBucket: "desacenter-41018.appspot.com",
+        messagingSenderId: "816125856145",
+        appId: "1:816125856145:web:063b22b74507452050b230",
+        measurementId: "G-BWL2M9WNXQ"
     };
 
     // Initialize Firebase
