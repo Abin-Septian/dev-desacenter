@@ -76,6 +76,9 @@
     width: 100%;
     height: 100%;
 }
+#rcard {
+  border-radius: 30px 30px 30px 30px; 
+}
 </style>
 </head>
 <body>
@@ -129,7 +132,7 @@
                                 <li><a href="#page">Pages</a></li>
                                 <li><a href="#blog">Blog</a></li>
                                 <li><a href="#contact-us">Contact Us</a></li>
-                                <li> <a class="btn rounded btnlogin p-3 " id="btnlogin" href="{{ url('login/') }}">DAFTAR / BERGABUNG</a> </li>
+                                <li> <a class="btn rounded btnlogin p-3 " id="btnlogin" href="{}">DAFTAR / BERGABUNG</a> </li>
                                
                             </ul>
                         </nav>
@@ -149,19 +152,19 @@
 
         <div id="btnwhatsapp" style="position: fixed;bottom: 30px;right: 20px;z-index:99;">
           <div class="btn-group dropup">
-            <button type="button" class="btn btn-default dropdown-toggle" style="border-radius: 20px;background: #3bdf58;padding: 0px;padding-right: 10px;color: #fff; border-color:rgb(255, 255, 255);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-default dropdown-toggle" style="border-radius: 40px;background: #3bdf58;padding: 0px;padding-right: 10px;color: #fff;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="fab fa-whatsapp" style="border-radius: 50%;padding: 10px;background: #43c059;font-size: 16px;"></span> Hubungi Kami <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" style="background: #3bdf58;margin: auto 0 0.1em 0.5em;border: 2px solid rgb(255, 255, 255);">
+            <ul class="dropdown-menu" style="background: #3bdf58;margin-bottom: 5px;border: 1px solid #fff;">
               
-               <li><a target="_blank" href="https://wa.me/6281996900800?text=Saya%20mengalami%20kesulitan%2C%20tolong%20dibantu." style="color: #fff;">&nbsp;CS 1</a></li>
+               <li><a target="_blank" href="https://wa.me/6281996900800?text=Saya%20mengalami%20kesulitan%2C%20tolong%20dibantu." style="color: #fff;">CS 1</a></li>
               <li role="separator" class="divider" style="color: #fff;"></li>
               
-              <li><a target="_blank" href="https://wa.me/628572900800?text=Saya%20mengalami%20kesulitan%2C%20tolong%20dibantu." style="color: #fff;">&nbsp;CS 2</a></li>
+              <li><a target="_blank" href="https://wa.me/628572900800?text=Saya%20mengalami%20kesulitan%2C%20tolong%20dibantu." style="color: #fff;">CS 2</a></li>
             </ul>
           </div>
         </div>
-    <footer class="footer-area pt-60 pb-60 blue-bg" id="contact-us">
+    <footer class="footer-area pt-60 pb-60 black-bg" id="contact-us">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">

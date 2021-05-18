@@ -59,7 +59,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="single-icon-box icon-box-img-1">
+                    <div class="single-icon-box icon-box-img-1 card" id="rcard">
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="far fa-chart-bar"></i> APA ITU DESACENTER</h6>
                             <div class="iconbox-content-body">
@@ -96,7 +96,7 @@
     </div>
     <!-- End Icon Box Area -->
     <!-- Start We are Bemax Area -->
-    <div class="bemax-area gray-bg pt-65 pb-25">
+    <!-- <div class="bemax-area gray-bg pt-65 pb-25">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center mb-70">
@@ -174,7 +174,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- End We are Bemax Area -->
     <!-- Start Latest Project Area -->
     <div class="latest-project-area blue-bg pt-70 pb-70" id="portfolio">
