@@ -9,6 +9,11 @@
 
 ## About Desacenter
 
+
+## Devlopment
+
+To start the PHP dev server, which serves as the API of the application, run the following command from the root directory. By default, the server will listen at port 8000.
+
 ```
 php artisan serve
 ```
