@@ -132,7 +132,7 @@
                                 <li><a href="#page">Pages</a></li>
                                 <li><a href="#blog">Blog</a></li>
                                 <li><a href="#contact-us">Contact Us</a></li>
-                                <li> <a class="btn rounded btnlogin p-3 " id="btnlogin" href="{}">DAFTAR / BERGABUNG</a> </li>
+                                <li> <a class="btn rounded btnlogin p-3 " id="btnlogin" href="{{ url('login/') }}">DAFTAR / BERGABUNG</a> </li>
                                
                             </ul>
                         </nav>
