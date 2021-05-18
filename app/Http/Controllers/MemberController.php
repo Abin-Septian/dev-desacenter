@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 class MemberController extends Controller
 {
     
-
     public function index(Request $request){
+
+       
+        return view('layoutmain.main');
+    }
+
+
+    public function login1(Request $request){
 
         if (!$request->session()->has('uid')) { 
             return redirect('/login');
