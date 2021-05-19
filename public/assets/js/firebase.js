@@ -43,16 +43,53 @@ function onSignInSubmit(){
 
         confirmationResult.confirm(otp).then(function(result){
             var user = result.user;
+            var _token = $("input[name='_token']").val();
+
             console.log(user);
 
-            
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: 'Selamat datang di Desacenter.id'
-            }).then (function() {
-                window.location.href = "/";
+            $.ajax({
+                url :  "/authLogin",
+                type : "POST",
+                dataType : "JSON",
+                data : {
+                    _token  : _token,
+                    uid     : user.uid,
+                    telp    : user.phoneNumber 
+                },
+                beforeSend : function(xhr)
+                {
+                    $(this).prop("disabled", true);
+                },
+                success : function(result, status, xhr)
+                {
+                    console.log(result);
+
+                    if(result.status)
+                    {
+                        $("#notifikasi").html("<div class='alert alert-success'>"+result.message+"</div>")
+                    
+                        setTimeout(function(){
+                            window.location.href = '/profil';
+                        }, 1500);
+                    }
+                    else
+                    {
+                        $("#notifikasi").html("<div class='alert alert-danger'>"+result.message+"</div>")
+                        $(this).prop("disabled", false);
+                    }
+                },
+                error : function(status, error, xhr)
+                {
+                    console.log("error : "+error);
+                }
             });
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Berhasil!',
+            //     text: 'Selamat datang di Desacenter.id'
+            // }).then (function() {
+            //     window.location.href = "/";
+            // });
 
             // if(user != null){
             //     var phone = user.phoneNumber;
@@ -82,54 +119,99 @@ function onSignInSubmit(){
 
         confirmationResult.confirm(otp).then(function(result){
             var user = result.user;
-            console.log(user);
-                var phone = user.phoneNumber;
-                var vUid = user.uid;
+            
+            var phone = user.phoneNumber;
+            var vUid = user.uid;
 
-                $.ajax({
-                    url: '/u-register',
-                    type: "POST",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    dataType: "JSON",
-                    cache: false,
-                    data:{
-                        "uid": vUid,
-                        "phone": phone
-                    },
-                    success:function(response){
-                        if(response.success){
-                            Swal.fire({
-                                icon: 'success',
-                                title: "Selamat datang di Desacenter.id",
-                                text: ' Anda akan di arahkan dalam 3 Detik',
-                                timer: 3000,
-                                showCancelButton: false,
-                                showConfirmButton: false
-                            }).then (function() {
-                                window.location.href = "/";
-                            });
-                        }else{
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Login Gagal',
-                                text: 'Silahkan coba beberapa saat lagi.'
-                            });
-                        }
-                        console.log(response);
-                    },
+            console.log(phone);
+            console.log(vUid);
 
-                    error:function(response){
-                        console.log(response);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Ups',
-                            html: '<b>Error</b> karena ' + response
-                        });
+            
+            $.ajax({
+                url : "/daftarUser",
+                type : "POST",
+                dataType : "JSON",
+                data : {
+                    _token : $("input[name='_token']").val(),
+                    telp : phone,
+                    uid : vUid
+                },
+                beforeSend : function(xhr)
+                {
+                    $(this).prop("disabled", true);
+                },
+                success : function(result, status, xhr)
+                {
+                    //console.log(result);
+
+                    if(result.status)
+                    {
+                        $("#notifikasi").html("<div class='alert alert-success'>"+result.message+"</div>");
+                    
+                        setTimeout(function(){
+                            window.location.href = "/join-desa";
+                        }, 1500);
                     }
+                    else
+                    {
+                        $("#notifikasi").html("<div class='alert alert-danger'>"+result.message+"</div>");
+                    }
+                },
+                error : function(status, error, xhr)
+                {
+                    console.log(status);
+                },
+                complete : function(xhr)
+                {
+                    $(this).prop("disabled", true);
+                }
 
-                });
+            });
+
+            // $.ajax({
+            //     url: '/u-register',
+            //     type: "POST",
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     dataType: "JSON",
+            //     cache: false,
+            //     data:{
+            //         "uid": vUid,
+            //         "phone": phone
+            //     },
+            //     success:function(response){
+            //         if(response.success){
+            //             Swal.fire({
+            //                 icon: 'success',
+            //                 title: "Selamat datang di Desacenter.id",
+            //                 text: ' Anda akan di arahkan dalam 3 Detik',
+            //                 timer: 3000,
+            //                 showCancelButton: false,
+            //                 showConfirmButton: false
+            //             }).then (function() {
+            //                 window.location.href = "/";
+            //             });
+            //         }else{
+            //             Swal.fire({
+            //                 icon: 'error',
+            //                 title: 'Login Gagal',
+            //                 text: 'Silahkan coba beberapa saat lagi.'
+            //             });
+            //         }
+            //         console.log(response);
+            //     },
+
+            //     error:function(response){
+            //         console.log(response);
+            //         Swal.fire({
+            //             icon: 'error',
+            //             title: 'Ups',
+            //             html: '<b>Error</b> karena ' + response
+            //         });
+            //     }
+
+            // });
             
         }).catch(function(error){
             Swal.fire({
@@ -158,12 +240,16 @@ $("#btn-verifikasi").on('click', function(){
     .then(function(result){
         window.confirmationResult = result;
         coderesult = result;
+        
         console.log(result);
         Swal.fire({
             icon: 'success',
             title: 'Terkirim',
             text: 'Kode OTP telah dikirimkan ke ' + pcode
         });
+
+
+        //alert("oke");
         $("#btn-daftar").show();
         $("#btn-masuk").show();
         $("#btn-verifikasi").hide();

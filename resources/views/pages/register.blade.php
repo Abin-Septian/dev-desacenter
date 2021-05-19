@@ -23,7 +23,11 @@
                                 </a>
                             </div>
                             <h4 class="text-center mt-5">Masukkan nomor handphone untuk daftar.</h4>
+
+                            <div id="notifikasi"></div>
+
                             <form class="mt-5 mb-5">
+                                @csrf
                                 <div class="form-group" id="form-phone">
                                     <label>Nomor Handphone</label>
                                     <input type="tel" minlength="11" maxlength="12" class="form-control" placeholder="Nomor Handphone" name="phone" id="phone">

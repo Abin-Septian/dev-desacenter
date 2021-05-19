@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
@@ -28,12 +29,38 @@ class MemberController extends Controller
 
 
     public function profil(Request $request){
-        if (!$request->session()->has('uid')) { 
-            return redirect('/login');
+        
+        if(!$request->session()->has('uid'))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
         }
 
-        $datas = $this->getDetail($request->session()->get('uid'));
-        return view('pages.profil')->with($datas);
+        //$datas = $this->getDetail($request->session()->get('uid'));
+        return view('pages.profil');
+    }
+
+    public function joindesa(Request $request)
+    {
+        
+        if(!$request->session()->has('uid'))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        $this->provinsi = DB::table('mst_provinsi')
+                             ->select(
+                                "kode_propinsi as kode",
+                                "mst_provinsi.nama_propinsi as nama"
+                             )
+                             ->get();
+
+        $data = array(
+            "provinsi" => $this->provinsi
+        );
+
+        return view('pages.joindesa')->with($data);
     }
 
 
@@ -85,7 +112,7 @@ class MemberController extends Controller
 
     public function login(Request $request){
         if ($request->session()->has('uid')) { 
-            return redirect('/');
+            return redirect('/profil');
         }
 
         $data = array(
@@ -100,13 +127,14 @@ class MemberController extends Controller
     public function register(Request $request){
 
         if ($request->session()->has('uid')) { 
-            return redirect('/');
+            return redirect('/profil');
         }
 
 
         $data = array(
             "title" => "Daftar - DesaCenter.ID"
         );
+
         return view('pages.register')->with($data);
     }
 

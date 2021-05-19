@@ -97,8 +97,13 @@
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-lg">
+                        <a class="" href="{{ url('/join-desa')}}" aria-expanded="false">
+                            <i class="mdi mdi-account-box"></i><span class="nav-text">Join Desa</span>
+                        </a>
+                    </li>
+                    <li class="mega-menu mega-menu-lg">
                         <a class="" href="{{ url('/profil')}}" aria-expanded="false">
-                            <i class="mdi mdi-account-box"></i><span class="nav-text">Profil</span>
+                            <i class="mdi mdi-account-box"></i><span class="nav-text">Profil Desa</span>
                         </a>
                     </li>
                     <li class="mega-menu mega-menu-lg">

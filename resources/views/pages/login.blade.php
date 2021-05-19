@@ -22,8 +22,16 @@
                                         <img src="{{ asset('assets/images/dsc_logo.png') }}" alt="desacenter-logo" style="height: 50px" >
                                     </a>
                                 </div>
+
                                 <h4 class="text-center mt-5">Masuk menuju akun anda</h4>
+                                @if(Session::has('status'))
+                                    <div class="alert alert-danger">{{ Session::get('status')  }}</div>
+                                @endif
+
+                                <div id="notifikasi"></div>
                                 <form class="mt-5 mb-5">
+
+                                    @csrf
                                     <div class="form-group" id="form-phone">
                                         <label>Nomor Telepon</label>
                                         <input type="tel" class="form-control" placeholder="81234567890" name="phone" id="phone">
