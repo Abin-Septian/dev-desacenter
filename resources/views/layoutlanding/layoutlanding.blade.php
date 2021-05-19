@@ -53,9 +53,9 @@
                     right: 10px;
                     bottom: 10px;
                 }
-    .btnlogin{
-    
-        border-radius: 30px;
+    #btnlogin{
+        
+        border-radius: 15px 15px 15px 15px; 
     }
     .video-container {
     overflow: hidden;
@@ -75,6 +75,9 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+#rcard {
+  border-radius: 15px 15px 15px 15px; 
 }
 </style>
 </head>
@@ -130,7 +133,7 @@
                                 <li><a href="#blog">Blog</a></li>
                                 <li><a href="#contact-us">Contact Us</a></li>
                                 <li> <a class="btn rounded btnlogin p-3 " id="btnlogin" href="{{ url('register/') }}">DAFTAR / BERGABUNG</a> </li>
-                               
+
                             </ul>
                         </nav>
                     </div>
@@ -161,7 +164,7 @@
             </ul>
           </div>
         </div>
-    <footer class="footer-area pt-60 pb-60 black-bg" id="contact-us">
+    <footer class="footer-area pt-60 pb-60 blue-bg" id="contact-us">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">

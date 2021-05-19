@@ -59,7 +59,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="single-icon-box icon-box-img-1">
+                    <div class="single-icon-box icon-box-img-1 card" id="rcard">
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="far fa-chart-bar"></i> APA ITU DESACENTER</h6>
                             <div class="iconbox-content-body">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-icon-box icon-box-img-2">
+                    <div class="single-icon-box icon-box-img-2 card" id="rcard">
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="fas fa-cogs"></i> BAGAIMANA CARA BERGABUNG DENGAN KAMI</h6>
                             <div class="iconbox-content-body">
@@ -81,11 +81,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-icon-box icon-box-img-3">
+                    <div class="single-icon-box icon-box-img-3 card" id="rcard">
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="fas fa-chart-line"></i> POTENSI DESA KEDEPAN</h6>
                             <div class="iconbox-content-body">
-                                <p>Penjelasan singkat</p>
+                                <p >Penjelasan singkat</p>
                                 <a class="btn btn-inline read-more-btn" href="#"><i class="fas fa-plus-square"></i> Read More</a>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
     </div>
     <!-- End Icon Box Area -->
     <!-- Start We are Bemax Area -->
-    <div class="bemax-area gray-bg pt-65 pb-25">
+    <!-- <div class="bemax-area gray-bg pt-65 pb-25">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center mb-70">
@@ -113,7 +113,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Responsive Design</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Very Easy Customize</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Free Font Icons</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Mobile Ready</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Modern Style</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
@@ -168,16 +168,16 @@
                         </div>
                         <div class="item-content">
                             <h6><a href="#">Awesome Support</a></h6>
-                            <p>Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
+                            <p class="text-muted">Vestibulum non diam quis nisl dignissim posuere a vulputate urna nunc velit</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- End We are Bemax Area -->
     <!-- Start Latest Project Area -->
-    <div class="latest-project-area black-bg pt-70 pb-70" id="portfolio">
+    <div class="latest-project-area blue-bg pt-70 pb-70" id="portfolio">
         <div class="container">
         <div class="row">
                 <div class="col-lg-12 text-center mb-70">
@@ -262,7 +262,7 @@
                         <div class="section-title">
                             <h4>Working With Us</h4>
                         </div>
-                        <p>We’ve completed more than <span>100+</span>project for our am azing clients, If you interested?</p>
+                        <p class="text-muted">We’ve completed more than <span>100+</span>project for our am azing clients, If you interested?</p>
                         <a href="#" class="btn hire-us-btn">Hire Us</a>
                     </div>
                 </div>

@@ -52,7 +52,7 @@
       font-weight: 400;
       font-style: normal;
       font-size: 15px;
-      color: #666666;
+      color: #f0f0f0;
       line-height: 24px;
    }
    .img {
@@ -76,12 +76,12 @@
    a:hover,
    .main-menu li a:hover,
    .footer-menu li a:hover {
-      color: #4272d7;
+      color: #004a95;
       text-decoration: none;
    }
    a,
    button {
-      color: #f39c12;
+      color: #f07f00;
       outline: medium none;
    }
    .uppercase {
@@ -98,7 +98,7 @@
       font-family: var(--font-lato);
       font-weight: 900;
       font-style: normal;
-      color:#f39c12;
+      color:#f07f00;
       margin: 0 0 15px;
       text-transform: normal;
    }
@@ -147,7 +147,7 @@
       padding: 0;
    }
    label {
-      color: #f39c12;
+      color: #f07f00;
       cursor: pointer;
       font-size: 14px;
       font-weight: 400;
@@ -195,7 +195,7 @@
       position: relative
    }
    .theme-overlay:before {
-      background: #f39c12 none repeat scroll 0 0;
+      background: #f07f00 none repeat scroll 0 0;
       content: "";
       height: 100%;
       left: 0;
@@ -206,14 +206,14 @@
       width: 100%;
    }
    .separator {
-      border-top: 1px solid #f39c12
+      border-top: 1px solid #f07f00
    }
    /* button style */
 
    .btn {
       -moz-user-select: none;
-      background: #f39c12 none repeat scroll 0 0;
-      border: 2px solid #f39c12;
+      background: #f07f00 none repeat scroll 0 0;
+      border: 2px solid #f07f00;
       border-radius: 0;
       color: #fff;
       cursor: pointer;
@@ -235,7 +235,7 @@
    }
    .btn:hover {
       background: transparent;
-      color: #f39c12
+      color: #f07f00
    }
    .btn.btn-lg {
       padding: 10px 25px;
@@ -247,16 +247,16 @@
    .btn.btn-inline {
       background: transparent none repeat scroll 0 0;
       border: 0 none;
-      color: #f39c12;
+      color: #f07f00;
       padding: 0;
       text-decoration: none;
    }
    .btn.btn-inline:hover {
-      color: #f39c12;
+      color: #f07f00;
       text-decoration: underline;
    }
    .theme-bg {
-      background: #f39c12;
+      background: #f07f00;
    }
    .gray-bg {
       background: #f0f0f0;
@@ -267,8 +267,13 @@
    .bg-white {
       background-color: #ffffff;
    }
+
+   .blue-bg{
+    background-color: #00498f;
+   }
+   
    .breadcrumb > .active {
-      color: #f39c12;
+      color: #f07f00;
    }
    input:focus[type="url"], input:focus[type="text"], input:focus[type="email"], input:focus[type="tel"], input:focus[type="button"], input:focus[type="submit"], input:focus[type="search"], button:focus[type="button"], button:focus[role="button"], button:focus, input:focus {
       outline: none;
@@ -282,7 +287,7 @@
    .owl-carousel .owl-nav button {
       position: absolute;
       background: #999 !important;
-      color: #f39c12 !important;
+      color: #f07f00 !important;
       border-radius: 2px;
       height: 30px;
       width: 30px;
@@ -309,14 +314,14 @@
    .owl-carousel .owl-dots button {
       width: 10px;
       height: 10px;
-      background: #f39c12;
+      background: #f07f00;
       display: inline-block;
       margin: 5px;
       border-radius: 50%;
    }
 
    .owl-carousel .owl-dots button.active {
-      background: #4272d7;
+      background: #004a95;
    }
 
    .owl-carousel .owl-dots {
@@ -346,7 +351,7 @@
     padding: 0px 10px;
 }
 .header-area {
-    border-top: 5px solid #4272d7;
+    border-top: 5px solid #004a95;
     padding: 30px 0;
 }
 .main-menu li.search-trigger a {
@@ -365,7 +370,7 @@
     padding: 20px 0;
 }
 .main-menu li.active a {
-    color: #4272d7;
+    color: #004a95;
 }
 
 
@@ -614,7 +619,7 @@
     top: 210px;
     width: 100%;
     height: 100%;
-    background: #4272d7;
+    background: #004a95;
     opacity: .9;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     color: #fff;
@@ -684,20 +689,20 @@
 .item-icon i {
     width: 50px;
     height: 50px;
-    background: #4272d7;
+    background: #004a95;
     color: #fff;
     font-size: 25px;
     text-align: center;
     line-height: 50px;
     display: inline-block;
-    border: 1px solid #4272d7;
+    border: 1px solid #004a95;
     -webkit-transition: .3s;
     transition: .3s;
 }
 
 .item-icon i:hover {
     background: transparent;
-    color: #4272d7;
+    color: #004a95;
 }
 .item-content {
     padding-left: 20px;
@@ -755,7 +760,7 @@
     left: 0;
     top: 0;
     content: "";
-    background: #4272d7;
+    background: #004a95;
     color: #fff;
     z-index: -1;
     -webkit-transform: scaleY(0);
@@ -838,7 +843,7 @@
     transition: .5s;
 }
 .video-img-thumbnail a:hover {
-    color: #4272d7;
+    color: #004a95;
 }
 .single-choose-item h6 {
     font-size: 16px;
@@ -932,11 +937,11 @@
 }
 
 .blog-btn .read-more-btn:hover {
-    color: #4272d7;
+    color: #004a95;
 }
 
 .blog-tags a:hover {
-    color: #4272d7;
+    color: #004a95;
 }
 .carousel-area .section-title h4 {
     margin-bottom: 30px;
@@ -1007,7 +1012,7 @@
 }
 
 .author-content a:hover {
-    color: #4272d7;
+    color: #004a95;
 }
 /* End Carousel Area */
 /* Start Brand Area
@@ -1079,7 +1084,7 @@
 }
 
 .social-links li:hover {
-    background: #4272d7;
+    background: #004a95;
 }
 .widget-title h6 {
     font-size: 15px;
@@ -1143,7 +1148,7 @@
     -webkit-transition: .3s;
     transition: .3s;
 }
-.address-line p a:hover {color: #4272d7;}
+.address-line p a:hover {color: #004a95;}
 .newsletter-text p {
     font-size: 13px;
     color: #cccccc;
@@ -1212,7 +1217,7 @@ button#Switcher__control {
 /* End Color NIp */
 /* Start ScrollUp */
 #scrollUp {
-    background: #4272d7;
+    background: #004a95;
     height: 40px;
     width: 40px;
     position: absolute;
