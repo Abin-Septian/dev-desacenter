@@ -69,4 +69,34 @@ class MasterController extends Controller
         echo json_encode($this->response);
 
     }
+
+    public function desa(Request $request)
+    {
+        $this->input = $request->input();
+
+        $this->provinsi = $this->input['provinsi'];
+        $this->kabupaten = $this->input['kabupaten'];
+        $this->kecamatan = $this->input['kecamatan'];
+
+        $this->result = DB::table('mst_desa as a')
+                           ->select('a.kode_desa as kode','a.nama_desa as nama', 'a.id_desa as id')
+                           ->where('kode_kecamatan', $this->kecamatan)
+                           ->get();
+
+        if($this->result->count() == 0)
+        {
+            $this->response = array(
+                "status" => false,
+                "data"   => array()
+            );
+        }
+        else
+        {
+            $this->response = array(
+                "status" => true,
+                "data"   => $this->result
+            );
+        }
+        echo json_encode($this->response);
+    }
 }

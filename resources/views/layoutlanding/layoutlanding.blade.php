@@ -117,7 +117,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-6">
                         <div class="site-logo logo">
-							<img src="{{(asset('assetslanding/img/desabrilian.png'))}}" class="logo">
+							<img src="{{ (asset('assetslanding/img/desabrilian.png')) }}" class="logo">
                         </div>
                     </div>
                     <div class="col-6 d-lg-none static text-right">

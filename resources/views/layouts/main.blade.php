@@ -69,8 +69,8 @@
                             <div class="drop-down dropdown-profile animated bounceInDown">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><a href="#" onclick="signOut()"><i class="icon-power"></i> <span>Logout</span></a>
-                                        </li>
+                                        <li><a href="{{ url('/profil/akun') }}"><i class="icon-power"></i> <span>Akun Anda</span></a></li>
+                                        <li><a href="#" onclick="signOut()"><i class="mdi mdi-power text-danger"></i> Logout</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -156,6 +156,7 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    
     <script src="{{ asset('assets/plugins/common/common.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.min.js') }}"></script>
     <script src="{{ asset('assets/js/settings.js') }}"></script>

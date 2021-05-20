@@ -36,10 +36,14 @@ Route::get('/logout', [AuthController::class, 'logout']);
 //RYZVIE
 Route::post('/daftarUser', [AuthController::class, 'daftarUser']);
 Route::post('/authLogin', [AuthController::class, 'authLogin']);
+Route::post('/postJoinDesa', [MemberController::class, 'postJoinDesa']);
+Route::get('/profil/akun', [MemberController::class, 'profilAkun']);
+Route::post('/profil/update', [MemberController::class, 'updateProfil']);
 
 //GET MASTER DATA
 Route::post('/getMaster/kabupaten', [MasterController::class, 'kabupaten']);
 Route::post('/getMaster/kecamatan', [MasterController::class, 'kecamatan']);
+Route::post('/getMaster/desa', [MasterController::class, 'desa']);
 
 
 

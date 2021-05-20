@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
-    
+    //NANDA
     public function index(Request $request){
 
        
@@ -25,44 +25,6 @@ class MemberController extends Controller
         $datas = $this->getDetail($request->session()->get('uid'));
         return view('pages.home')->with($datas);
     }
-
-
-
-    public function profil(Request $request){
-        
-        if(!$request->session()->has('uid'))
-        {
-            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
-            exit();
-        }
-
-        //$datas = $this->getDetail($request->session()->get('uid'));
-        return view('pages.profil');
-    }
-
-    public function joindesa(Request $request)
-    {
-        
-        if(!$request->session()->has('uid'))
-        {
-            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
-            exit();
-        }
-
-        $this->provinsi = DB::table('mst_provinsi')
-                             ->select(
-                                "kode_propinsi as kode",
-                                "mst_provinsi.nama_propinsi as nama"
-                             )
-                             ->get();
-
-        $data = array(
-            "provinsi" => $this->provinsi
-        );
-
-        return view('pages.joindesa')->with($data);
-    }
-
 
 
     public function unit_usaha(Request $request){
@@ -154,6 +116,135 @@ class MemberController extends Controller
         );
 
         return $datas;
+
+    }
+
+
+    //RYZVIE
+    public function profil(Request $request){
+        
+        if(!$request->session()->has('uid'))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        //$datas = $this->getDetail($request->session()->get('uid'));
+        return view('pages.profil');
+    }
+
+    public function joindesa(Request $request)
+    {
+        
+        if(!$request->session()->has('uid'))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        $this->uid = $request->session()->get("uid");
+
+        $this->provinsi = DB::table('mst_provinsi')
+                             ->select(
+                                "kode_propinsi as kode",
+                                "mst_provinsi.nama_propinsi as nama"
+                             )
+                             ->get();
+
+        $this->isSudahPilihDesa = DB::table("mst_member")
+                                    ->where("uid", $this->uid)
+                                    ->get();
+
+        $data = array(
+            "provinsi" => $this->provinsi,
+            "isSudahPilih" => $this->isSudahPilihDesa
+        );
+
+        return view('pages.joindesa')->with($data);
+    }
+
+    public function postJoinDesa(Request $request)
+    {
+
+        if(!$request->session()->has('uid'))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        $this->input = $request->input();
+
+        $this->instansi = $this->input['iddesa'];
+        $this->uid      = $request->session()->get("uid");
+
+        DB::table("mst_member as a")
+          ->where("uid", $this->uid)
+          ->update(['id_instansi' => $this->instansi]);
+
+
+        $this->response = array(
+            "status" => true,
+            "message" => "Data telah berhasil disimpan."
+        );
+
+        echo json_encode($this->response);
+    }
+
+    public function profilAkun(Request $request)
+    {
+        if(!$request->session()->has('uid'))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+
+        $this->uid = $request->session()->get('uid');
+
+        $this->result = DB::table("mst_member")
+                          ->where("uid", $this->uid)
+                          ->get();
+
+        $data = array(
+            "response" => $this->result->first()
+        );
+
+        return view("pages.profilakun")->with($data);
+    }
+
+    public function updateProfil(Request $request)
+    {
+        //echo "<pre>";print_r($request->file->getClientOriginalName());"</pre>";
+
+        $this->input = $request->input();
+        $name = "";
+
+        $this->nama   = $this->input['nama'];
+        $this->email  = $this->input['email'];
+        $this->alamat = $this->input['alamat'];
+
+        $this->uid    = $request->session()->get('uid');
+
+        if($request->file())
+        {
+            $request->validate([
+                'file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048'
+            ]);
+
+            $name = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('public/upload', $name);
+        }
+
+        DB::table("mst_member")
+               ->where("uid", $this->uid)
+               ->update([
+                    "foto"  => $name,
+                    "nama"  => $this->nama,
+                    "alamat"  => $this->nama,
+                    "email" => $this->email
+               ]);
+
+        return redirect("/profil/akun")->with("status", "Data Berhasil diupdate.");
 
     }
 
