@@ -64,7 +64,7 @@
             <div class="col-lg-12">
                 <!--- startcol  -->
                 <div class="card">
-                    @if($isSudahPilih->count() == 0)
+                    @if($isSudahPilih->id_instansi == 0)
                     <div class="card-body">
 
                         
@@ -136,7 +136,11 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="col-12">
                                 <div class="alert alert-success">
-                                    Anda sudah memilih desa. Silahkan anda cek ke halaman profil desa.
+                                    Anda sudah memilih desa. Silahkan anda cek ke halaman profil desa untuk update informasi desa dan bumdes
+                                </div>
+
+                                <div class="text-center">
+                                    <a href="{{ url('profil') }}" type="button" class="btn btn-primary"> Update Profil Desa </a>
                                 </div>
                             </div>
                         </div>

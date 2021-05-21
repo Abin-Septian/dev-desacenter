@@ -11,6 +11,7 @@ class MemberController extends Controller
     //NANDA
     public function index(Request $request){
 
+        
        
         return view('layoutmain.main');
     }
@@ -121,6 +122,29 @@ class MemberController extends Controller
 
 
     //RYZVIE
+
+    public function dashboard(Request $request)
+    {
+        if(!$request->session()->has('uid'))
+        {
+            return redirect("/login")->with("status","Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        $this->uid = $request->session()->get("uid");
+
+        $this->member = DB::table("mst_member as a")
+                          ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto")
+                          ->where("a.uid", $this->uid)
+                          ->get();
+
+        $data = array(
+            "member" => $this->member->first()
+        );
+
+        return view("pages.dashboard")->with($data);
+    }
+
     public function profil(Request $request){
         
         if(!$request->session()->has('uid'))
@@ -129,8 +153,18 @@ class MemberController extends Controller
             exit();
         }
 
-        //$datas = $this->getDetail($request->session()->get('uid'));
-        return view('pages.profil');
+        $this->uid = $request->session()->get("uid");
+
+        $this->member = DB::table("mst_member as a")
+                          ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto")
+                          ->where("a.uid", $this->uid)
+                          ->get();
+
+        $data = array(
+            "member" => $this->member->first()
+        );
+        
+        return view('pages.profil')->with($data);
     }
 
     public function joindesa(Request $request)
@@ -151,13 +185,20 @@ class MemberController extends Controller
                              )
                              ->get();
 
-        $this->isSudahPilihDesa = DB::table("mst_member")
+        $this->member = DB::table("mst_member as a")
+                        ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto")
+                        ->where("a.uid", $this->uid)
+                        ->get();
+
+        $this->isSudahPilihDesa = DB::table("mst_member as a")
+                                    ->select("a.id_instansi")
                                     ->where("uid", $this->uid)
                                     ->get();
 
         $data = array(
             "provinsi" => $this->provinsi,
-            "isSudahPilih" => $this->isSudahPilihDesa
+            "isSudahPilih" => $this->isSudahPilihDesa->first(),
+            "member" => $this->member->first()
         );
 
         return view('pages.joindesa')->with($data);
@@ -205,8 +246,14 @@ class MemberController extends Controller
                           ->where("uid", $this->uid)
                           ->get();
 
+        $this->member = DB::table("mst_member as a")
+                        ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto")
+                        ->where("a.uid", $this->uid)
+                        ->get();
+
         $data = array(
-            "response" => $this->result->first()
+            "response" => $this->result->first(),
+            "member"   => $this->member->first()
         );
 
         return view("pages.profilakun")->with($data);
@@ -231,18 +278,19 @@ class MemberController extends Controller
                 'file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048'
             ]);
 
-            $name = time().'_'.$request->file->getClientOriginalName();
+            $name = $this->uid.'_'.$request->file->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('public/upload', $name);
+
+            $data['foto'] = $name;
         }
+
+        $data['nama'] = $this->nama;
+        $data['alamat'] = $this->alamat;
+        $data['email'] = $this->email;
 
         DB::table("mst_member")
                ->where("uid", $this->uid)
-               ->update([
-                    "foto"  => $name,
-                    "nama"  => $this->nama,
-                    "alamat"  => $this->nama,
-                    "email" => $this->email
-               ]);
+               ->update($data);
 
         return redirect("/profil/akun")->with("status", "Data Berhasil diupdate.");
 

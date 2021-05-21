@@ -69,7 +69,7 @@ function onSignInSubmit(){
                         $("#notifikasi").html("<div class='alert alert-success'>"+result.message+"</div>")
                     
                         setTimeout(function(){
-                            window.location.href = '/profil';
+                            window.location.href = '/profil/akun';
                         }, 1500);
                     }
                     else
@@ -149,7 +149,7 @@ function onSignInSubmit(){
                         $("#notifikasi").html("<div class='alert alert-success'>"+result.message+"</div>");
                     
                         setTimeout(function(){
-                            window.location.href = "/join-desa";
+                            window.location.href = "/profil/akun";
                         }, 1500);
                     }
                     else

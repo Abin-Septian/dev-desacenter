@@ -39,6 +39,7 @@ Route::post('/authLogin', [AuthController::class, 'authLogin']);
 Route::post('/postJoinDesa', [MemberController::class, 'postJoinDesa']);
 Route::get('/profil/akun', [MemberController::class, 'profilAkun']);
 Route::post('/profil/update', [MemberController::class, 'updateProfil']);
+Route::get('/dashboard', [MemberController::class, 'dashboard']);
 
 //GET MASTER DATA
 Route::post('/getMaster/kabupaten', [MasterController::class, 'kabupaten']);

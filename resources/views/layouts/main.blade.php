@@ -64,7 +64,7 @@
                     <ul>
                         <li class="icons">
                             <a href="javascript:void(0)" class="log-user">
-                                <img src="../../assets/images/avatar/1.jpg" alt=""> <span>Nanda Fathurrizki</span>  <i class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
+                                <img src="../../assets/images/avatar/1.jpg" alt=""> <span style="text-transform:capitalize">{{ $member->nama }}</span>  <i class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
                             </a>
                             <div class="drop-down dropdown-profile animated bounceInDown">
                                 <div class="dropdown-content-body">
@@ -92,7 +92,7 @@
                     <li class="nav-label">Dashboard</li>
 
                     <li class="mega-menu mega-menu-lg">
-                        <a class="" href="{{ url('/')}}" aria-expanded="false">
+                        <a class="" href="{{ url('/dashboard')}}" aria-expanded="false">
                             <i class="mdi mdi-view-dashboard"></i><span class="nav-text">Dashboard</span>
                         </a>
                     </li>
@@ -111,11 +111,7 @@
                             <i class="mdi mdi-account-multiple"></i><span class="nav-text">Member/Pengurus</span>
                         </a>
                     </li>
-                    <li class="mega-menu mega-menu-lg">
-                        <a class="" href="{{ url('/unit-usaha')}}" aria-expanded="false">
-                            <i class="mdi mdi-store"></i><span class="nav-text">Unit Usaha</span>
-                        </a>
-                    </li>
+                    
                     <li class="mega-menu mega-menu-lg">
                         <a class="" href="{{ url('/assesment')}}" aria-expanded="false">
                             <i class="mdi mdi-content-copy"></i><span class="nav-text">Assesment</span>
@@ -123,7 +119,7 @@
                     </li>
                     <li class="mega-menu mega-menu-lg">
                         <a class="" href="{{ url('/edukasi')}}" aria-expanded="false">
-                            <i class="mdi mdi-help-circle"></i><span class="nav-text">Konten Edukasi</span>
+                            <i class="mdi mdi-help-circle"></i><span class="nav-text">Webinar / Training</span>
                         </a>
                     </li>
                 </ul>

@@ -22,7 +22,7 @@
                                     <img src="{{ asset('assets/images/dsc_logo.png') }}" alt="desacenter-logo" style="height: 50px" >
                                 </a>
                             </div>
-                            <h4 class="text-center mt-5">Masukkan nomor handphone untuk daftar.</h4>
+                            <h4 class="text-center mt-5">Daftar akun desacenter.id</h4>
 
                             <div id="notifikasi"></div>
 
@@ -30,15 +30,20 @@
                                 @csrf
                                 <div class="form-group" id="form-phone">
                                     <label>Nomor Handphone</label>
-                                    <input type="tel" minlength="11" maxlength="12" class="form-control" placeholder="Nomor Handphone" name="phone" id="phone">
+                                    <div>
+                                        <div class="input-group">
+                                            <div class="input-group-append bg-custom b-0"><span class="input-group-text">+62</span></div>
+                                            <input type="tel" minlength="11" maxlength="12" class="form-control" placeholder="Nomor Handphone" name="phone" id="phone">
+                                        </div><!-- input-group -->
+                                    </div>
                                 </div>
                                 <div class="form-group" id="form-otp">
                                     <label>Kode OTP</label>
                                     <input type="tel" minlength="6" maxlength="6" class="form-control" placeholder="6 Digit Kode OTP" name="otp" id="otp">
                                 </div>
-                                <div class="text-center mb-4 mt-4">
-                                    <a href="#" class="btn btn-primary" id="btn-verifikasi">Verifikasi</button>
-                                    <a href="#" class="btn btn-primary" id="btn-daftar"> Daftar</a>
+                                <div class="form-group text-center">
+                                    <a href="#" type="button" class="btn btn-primary col-12" id="btn-verifikasi">Verifikasi</a>
+                                    <a href="#" type="button" class="btn btn-primary col-12" id="btn-daftar"> Daftar</a>
                                 </div>
                                 <div class="recaptcha-container" id="recaptcha-container" style="display: none;"></div>
                             </form>

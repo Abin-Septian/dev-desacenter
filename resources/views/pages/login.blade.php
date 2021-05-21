@@ -23,7 +23,7 @@
                                     </a>
                                 </div>
 
-                                <h4 class="text-center mt-5">Masuk menuju akun anda</h4>
+                                <h4 class="text-center mt-5">Login akun desacenter.id</h4>
                                 @if(Session::has('status'))
                                     <div class="alert alert-danger">{{ Session::get('status')  }}</div>
                                 @endif
@@ -34,7 +34,12 @@
                                     @csrf
                                     <div class="form-group" id="form-phone">
                                         <label>Nomor Telepon</label>
-                                        <input type="tel" class="form-control" placeholder="81234567890" name="phone" id="phone">
+                                        <div>
+                                            <div class="input-group">
+                                                <div class="input-group-append bg-custom b-0"><span class="input-group-text">+62</span></div>
+                                                <input type="tel" class="form-control" placeholder="81234567890" name="phone" id="phone">
+                                            </div><!-- input-group -->
+                                        </div>
                                     </div>
                                     <div class="form-group" id="form-otp">
                                         <label>Kode OTP</label>
