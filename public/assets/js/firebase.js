@@ -62,14 +62,22 @@ function onSignInSubmit(){
                 },
                 success : function(result, status, xhr)
                 {
-                    console.log(result);
-
-                    if(result.status)
+                    if(result.status == true)
                     {
                         $("#notifikasi").html("<div class='alert alert-success'>"+result.message+"</div>")
                     
                         setTimeout(function(){
-                            window.location.href = '/profil/akun';
+                            window.location.href = '/dashboard';
+                        }, 1500);
+                    }
+                    else if(result.status == "belum")
+                    {
+                        $("#notifikasi").html("<div class='alert alert-danger'>"+result.message+"</div>")
+                        $(this).prop("disabled", false);
+
+                        
+                        setTimeout(function(){
+                            window.location.href = '/authRegisterWithEmail';
                         }, 1500);
                     }
                     else

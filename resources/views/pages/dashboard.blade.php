@@ -177,9 +177,9 @@
                             </div>
                             <div class="col-lg-4">
                             @if( Session::has('uid') )
-                                <img id="img" style="width:100px;border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$member->foto)) }}" data-holder-rendered="true">
+                                <img id="img" style="width:100px;height:90px; border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$member->foto)) }}" data-holder-rendered="true">
                             @else
-                                <img id="img" style="width:100px;border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
+                                <img id="img" style="width:100px;height:90px; border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
                             @endif
                             </div>
                         </div>

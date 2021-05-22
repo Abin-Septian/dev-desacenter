@@ -37,7 +37,7 @@
                                         <div>
                                             <div class="input-group">
                                                 <div class="input-group-append bg-custom b-0"><span class="input-group-text">+62</span></div>
-                                                <input type="tel" class="form-control" placeholder="81234567890" name="phone" id="phone">
+                                                <input type="tel" class="form-control" placeholder="81234567890"  onblur="return $(this).val(parseInt($(this).val()))" name="phone" id="phone">
                                             </div><!-- input-group -->
                                         </div>
                                     </div>

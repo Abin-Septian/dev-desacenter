@@ -218,10 +218,32 @@ class MemberController extends Controller
         $this->instansi = $this->input['iddesa'];
         $this->uid      = $request->session()->get("uid");
 
-        DB::table("mst_member as a")
-          ->where("uid", $this->uid)
-          ->update(['id_instansi' => $this->instansi]);
+        $this->checkMember = DB::table("mst_member as a")
+                             ->where("a.id_instansi", $this->instansi)
+                             ->get();
 
+        if($this->checkMember->count() > 0)
+        {
+            DB::table("mst_member as a")
+            ->where("uid", $this->uid)
+            ->update([
+                'id_instansi' => $this->instansi,
+                'is_admin' => 0,
+                'approved' => 0
+            ]);
+        }
+        else
+        {
+
+            DB::table("mst_member as a")
+            ->where("uid", $this->uid)
+            ->update([
+                'id_instansi' => $this->instansi,
+                'is_admin' => 1,
+                'approved' => 1
+            ]);
+
+        }
 
         $this->response = array(
             "status" => true,

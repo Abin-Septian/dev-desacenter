@@ -65,7 +65,124 @@ class AuthController extends Controller
         echo json_encode($response);
     }   
 
+
     public function authLogin(Request $request)
+    {
+        $this->input = $request->input();
+
+        $this->MigrationMember = DB::table("mst_member")
+                                   ->select("uid","email")
+                                   ->where("telp", $this->input['telp'])
+                                   ->get();
+
+        //MEMBER LAMA MELAKUKAN LOGIN DIAPLIKASI
+        if($this->MigrationMember->count() > 0)
+        {
+            
+            $this->member = $this->MigrationMember->first();
+
+            $this->uid = $this->member->uid;
+
+            //CHECK UID SUDAH DISET ATAU BELUM, 
+            //JIKA SUDAH DISET BERATI SUDAH PERNAH LOGIN
+            
+            if($this->uid == 0)
+            {
+
+                DB::table("mst_member as a")
+                  ->where("a.telp", $this->input['telp'])
+                  ->update([
+                      "uid" => $this->input['uid']
+                ]);
+
+                $this->getUid = DB::table("mst_member as a")
+                                  ->where("a.telp", $this->input['telp'])
+                                  ->get()->first();
+
+                $request->session()->put("uid", $this->getUid->uid);
+                $request->session()->put("id", $this->getUid->id);
+                $request->session()->put("telp", $this->getUid->telp);
+
+                $this->response = array(
+                    "status"  => true,
+                    "message" => "Login berhasil. Mohon tunggu untuk masuk ke halaman dashboard member."
+                );
+            }
+            else
+            {
+                //UID SUDAH ADA DAN LANGSUNG MASUK KE HALAMAN DASHBOARD
+                $this->getUid = DB::table("mst_member as a")
+                                  ->where("a.telp", $this->input['telp'])
+                                  ->where("a.uid", $this->input['uid'])
+                                  ->get()->first();
+
+                $request->session()->put("uid", $this->getUid->uid);
+                $request->session()->put("id", $this->getUid->id);
+                $request->session()->put("telp", $this->getUid->telp);
+
+                $this->response = array(
+                    "status"  => true,
+                    "message" => "Login berhasil. Mohon tunggu untuk masuk ke halaman dashboard member."
+                );
+            }
+        }
+        else
+        {
+            //MEMBER BARU YANG TIDAK MEMPUNYAI AKUN MELAKUKAN LOGIN
+
+            $this->uid = $this->input['uid'];
+
+            $request->session()->put("uid", $this->uid);
+            $request->session()->put("telp", $this->input['telp']);
+
+            $this->response = array(
+                "status" => "belum",
+                "message" => "Mohon tunggu sebentar untuk pengecekan email anda."
+            );
+
+            //return redirect("/authRegisterWithEmail")->with($data);
+            //exit();
+        }
+        
+
+        echo json_encode($this->response);
+    }
+
+    public function authRegisterWithEmail(Request $request)
+    {
+        $data = array(
+            "uid"  => $request->session()->get('uid'),
+            "telp" => $request->session()->get('telp')
+        );
+
+        return view("pages.authemail")->with($data);
+    }
+
+    public function daftarUserByEmail(Request $request)
+    {
+        $this->input = $request->input();
+
+        $this->uid   = $this->input['uid'];
+        $this->email = $this->input['email'];
+        $this->telp  = $this->input['telp'];
+
+        DB::table("mst_member")
+          ->insert([
+            "uid"   => $this->uid,
+            "email" => $this->email,
+            "telp"  => $this->telp,
+            "date_entry" => date("Y-m-d H:i:s"),
+            "status" => "aktif"
+          ]);
+
+        $request->session()->put("uid", $this->uid);
+        
+        return redirect("/dashboard");
+
+
+    }
+
+    public function authLogin_(Request $request)
     {
 
         $this->input = $request->input();
@@ -117,7 +234,7 @@ class AuthController extends Controller
                 'phone' => $phone
             ]);
 
-            if($uRef){
+            if($uRef){  
                 Session::put('uid', $uid);
                 return response()->json(['success' => true, 'message' => "Register Berhasil."],200);
             }else{

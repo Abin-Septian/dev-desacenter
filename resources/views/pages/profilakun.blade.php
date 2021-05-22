@@ -63,9 +63,9 @@
                                         <div class="form-group row ">
                                             <div class="col-lg-12 text-center">
                                             @if( $response->foto == NULL)
-                                                <img id="img" style="cursor:pointer; width:125px;border:1px solid #ccc;" onclick="uploadfoto(this)" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
+                                                <img id="img" style="cursor:pointer;height:110px; width:125px;border:1px solid #ccc;" onclick="uploadfoto(this)" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
                                             @else
-                                                <img id="img" style="cursor:pointer; width:125px;border:1px solid #ccc;" onclick="uploadfoto(this)" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$response->foto)) }}" data-holder-rendered="true">
+                                                <img id="img" style="cursor:pointer;height:110px; width:125px;border:1px solid #ccc;" onclick="uploadfoto(this)" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$response->foto)) }}" data-holder-rendered="true">
                                             @endif     
                                                 
                                                 <div style="color:#000; padding:10px 0px;">*Upload foto Profil (Jika ada)</div>
