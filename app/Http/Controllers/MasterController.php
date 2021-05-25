@@ -74,27 +74,38 @@ class MasterController extends Controller
     {
         $this->input = $request->input();
 
-        $this->provinsi = $this->input['provinsi'];
-        $this->kabupaten = $this->input['kabupaten'];
-        $this->kecamatan = $this->input['kecamatan'];
-
         $this->result = DB::table('mst_desa as a')
-                           ->select('a.kode_desa as kode','a.nama_desa as nama', 'a.id_desa as id')
-                           ->where('kode_kecamatan', $this->kecamatan)
+                           ->select('a.kode_desa as kode',
+                                    'a.nama_desa as nama', 
+                                    'a.id_desa as id',
+                                    'b.nama_kecamatan as kecamatan',
+                                    'c.nama_kabupaten as kabupaten',
+                                    'd.nama_propinsi as provinsi')
+                           ->join('mst_kecamatan as b', 'b.kode_kecamatan', '=', 'a.kode_kecamatan')
+                           ->join('mst_kabupaten as c', 'c.kode_kabupaten', '=', 'b.kode_kabupaten')
+                           ->join('mst_provinsi as d', 'd.kode_propinsi', '=', 'c.kode_propinsi')
+                           ->where('kode_desa', $this->input['kodedesa'])
                            ->get();
+
+        $this->jmlMember = DB::table('mst_instansi as a')
+                              ->join('mst_member as b', 'b.id_instansi', '=', 'a.id_instansi')
+                              ->where('a.kode_instansi', $this->input['kodedesa'])
+                              ->get();
 
         if($this->result->count() == 0)
         {
+            
             $this->response = array(
-                "status" => false,
-                "data"   => array()
+                "status"    => false,
+                "data"      => array()
             );
         }
         else
         {
             $this->response = array(
                 "status" => true,
-                "data"   => $this->result
+                "data"   => $this->result,
+                "jmlMember" => $this->jmlMember->count()
             );
         }
         echo json_encode($this->response);

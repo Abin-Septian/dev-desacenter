@@ -65,8 +65,74 @@ class AuthController extends Controller
         echo json_encode($response);
     }   
 
-
     public function authLogin(Request $request)
+    {
+        $this->input = $request->input();
+
+        $this->CheckMember = DB::table("mst_member")
+                                   ->select("uid","email")
+                                   ->where("telp", $this->input['telp'])
+                                   ->get();
+
+        if($this->CheckMember->count() > 0)
+        {
+            
+            $this->response = array(
+                "status" => true,
+                "message" => "Login berhasil. Mohon tunggu untuk masuk ke halaman member"
+            );
+
+            $request->session()->put("uid", $this->input['uid']);
+            $request->session()->put("telp", $this->input['telp']);
+
+            echo json_encode($this->response);
+        }
+        else
+        {
+
+            $this->getuniqpin = $this->getpin();
+
+            DB::table("mst_member")
+              ->insert([
+                  "telp"       => $this->input['telp'],
+                  "uid"        => $this->input['uid'],
+                  "pin"        => $this->getuniqpin,
+                  "date_entry" => date("Y-m-d H:i:s")
+              ]);
+
+            $this->response = array(
+                "status" => true,
+                "message" => "Login berhasil. Mohon tunggu untuk masuk ke halaman member"
+            );
+
+            $request->session()->put("uid", $this->input['uid']);
+            $request->session()->put("telp", $this->input['telp']);
+
+            echo json_encode($this->response);
+        }
+    }
+
+
+    public function getpin()
+    {
+        $chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $pin = substr(str_shuffle($chars), 0, 6);
+
+        $this->getPin = DB::table("mst_member as a")
+                            ->where("a.pin", $pin)
+                            ->get();
+
+        if($this->getPin->count() > 0)
+        {
+            $this->getpin();
+        }
+        else
+        {
+            return $pin;
+        }
+    }
+
+    public function authLogin__(Request $request)
     {
         $this->input = $request->input();
 

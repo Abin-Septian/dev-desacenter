@@ -1,5 +1,16 @@
 @extends('layouts.main')
 
+
+@section('autentikasiuser')
+
+    @if($member->email == NULL)
+    <div class="alert alert-danger" style="font-size:14px;">
+        Profil anda belum lengkap. Silahkan untuk melengkapi profil terlebih dahulu.
+    </div>
+    @endif
+
+@endsection
+
 @section('content')
 
 <style>
@@ -81,6 +92,8 @@
 
             <div class="col-lg-12">
                 <!--- startcol  -->
+                @yield('autentikasiuser')
+
                 <div class="card">
                     <div class="card-body">
                         <div class="tab-content" id="nav-tabContent">

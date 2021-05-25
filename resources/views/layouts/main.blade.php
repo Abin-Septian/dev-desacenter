@@ -88,36 +88,57 @@
         ***********************************-->
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
+                <ul class="metismenu mm-show" id="menu">
                     <li class="nav-label">Dashboard</li>
 
-                    <li class="mega-menu mega-menu-lg">
+                    <li class="">
                         <a class="" href="{{ url('/dashboard')}}" aria-expanded="false">
                             <i class="mdi mdi-view-dashboard"></i><span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <li class="mega-menu mega-menu-lg">
+                    <li class="">
                         <a class="" href="{{ url('/join-desa')}}" aria-expanded="false">
                             <i class="mdi mdi-account-box"></i><span class="nav-text">Join Desa</span>
                         </a>
                     </li>
-                    <li class="mega-menu mega-menu-lg">
-                        <a class="" href="{{ url('/profil')}}" aria-expanded="false">
+
+                    <li class="">
+                        <a class="" href="{{ url('/profil/desa')}}" aria-expanded="false">
                             <i class="mdi mdi-account-box"></i><span class="nav-text">Profil Desa</span>
                         </a>
                     </li>
-                    <li class="mega-menu mega-menu-lg">
+
+                    <li class="">
+                        <a class="" href="{{ url('/profil/bumdes')}}" aria-expanded="false">
+                            <i class="mdi mdi-account-box"></i><span class="nav-text">Profil Bumdes</span>
+                        </a>
+                    </li>
+
+                    <!-- <li class="mega-menu mega-menu-lg">
                         <a class="" href="{{ url('/member')}}" aria-expanded="false">
                             <i class="mdi mdi-account-multiple"></i><span class="nav-text">Member/Pengurus</span>
                         </a>
-                    </li>
+                    </li> -->
                     
-                    <li class="mega-menu mega-menu-lg">
-                        <a class="" href="{{ url('/assesment')}}" aria-expanded="false">
-                            <i class="mdi mdi-content-copy"></i><span class="nav-text">Assesment</span>
+                    <li class="">
+                        <a class="" href="{{ url('/program')}}" aria-expanded="false">
+                            <i class="mdi mdi-content-copy"></i><span class="nav-text">Program </span>
+                            <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
+
+                        <ul class="submenu mm-collapse mm-show">
+                            @foreach($program as $nilai)
+                            <li class="">
+                                <a href="javascript:void(0);" aria-expanded="false">{{ $nilai->nama }}  <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <ul class="submenu mm-collapse" style="height: 0px;">
+                                    <li><a href="javascript:void(0);">Webinar</a></li>
+                                    <li><a href="javascript:void(0);">Assesment</a></li>
+                                </ul>
+                            </li>
+                            @endforeach
+                        </ul>
                     </li>
-                    <li class="mega-menu mega-menu-lg">
+                    <li class="">
                         <a class="" href="{{ url('/edukasi')}}" aria-expanded="false">
                             <i class="mdi mdi-help-circle"></i><span class="nav-text">Webinar / Training</span>
                         </a>

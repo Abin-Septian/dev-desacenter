@@ -43,8 +43,12 @@
             <div class="col-lg-12">
                 <!--- startcol  -->
                 @if( Session::has('status') )
-                    <div class="alert alert-success">
+                    <div class="alert alert-success" style="font-size:14px;">
                         {{ Session('status') }}
+
+                        @if(Session::has('button'))
+                            <a href="{{ url('/join-desa') }}" type="button" style="font-size:14px;" class="btn btn-xs btn-primary">Join Desa</a>
+                        @endif
                     </div>
                 @endif
                 <div class="card">
@@ -63,9 +67,9 @@
                                         <div class="form-group row ">
                                             <div class="col-lg-12 text-center">
                                             @if( $response->foto == NULL)
-                                                <img id="img" style="cursor:pointer;height:110px; width:125px;border:1px solid #ccc;" onclick="uploadfoto(this)" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
+                                                <img id="img" style="cursor:pointer;height:120px; width:125px;border:1px solid #ccc;" onclick="uploadfoto(this)" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
                                             @else
-                                                <img id="img" style="cursor:pointer;height:110px; width:125px;border:1px solid #ccc;" onclick="uploadfoto(this)" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$response->foto)) }}" data-holder-rendered="true">
+                                                <img id="img" style="cursor:pointer;height:120px; width:125px;border:1px solid #ccc;" onclick="uploadfoto(this)" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$response->foto)) }}" data-holder-rendered="true">
                                             @endif     
                                                 
                                                 <div style="color:#000; padding:10px 0px;">*Upload foto Profil (Jika ada)</div>
@@ -78,7 +82,7 @@
                                             <label class="col-sm-3 col-form-label text-label">Uid [Otomatis dari sistem]</label>
                                             <div class="col-sm-9">
                                                 <div class="input-group">
-                                                    <input type="text" readonly class="form-control" id="uid" value="{{ $response->uid }}"
+                                                    <input type="text" readonly  class="form-control" id="uid" value="{{ $response->uid }}"
                                                         placeholder="Nama Lengkap" aria-describedby="uid">
                                                 </div>
                                             </div>
@@ -87,19 +91,25 @@
                                             <label class="col-sm-3 col-form-label text-label">Nama Akun</label>
                                             <div class="col-sm-9">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="nama" id="nama" value="{{ $response->nama }}"
+                                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ $response->nama }}"
                                                         placeholder="Nama Lengkap" aria-describedby="nama">
                                                 </div>
+                                                @error('nama')
+                                                    <div style="font-size:14px; padding:5px; margin-top:5px;" class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <label class="col-sm-3 col-form-label text-label">Email</label>
                                             <div class="col-sm-9">
                                                 <div class="input-group">
-                                                    <input type="text" value="{{ $response->email }}" class="form-control" name="email" id="Email"
+                                                    <input type="text" value="{{ $response->email }}" class="form-control @error('email') is-invalid @enderror" name="email" id="Email"
                                                         placeholder="Email"
                                                         aria-describedby="validationDefaultUsername2">
                                                 </div>
+                                                @error('email')
+                                                    <div style="font-size:14px; padding:5px; margin-top:5px;" class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
 

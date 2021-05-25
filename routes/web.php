@@ -18,7 +18,9 @@ use App\Http\Controllers\MasterController;
 */
 
 Route::get('/', [MemberController::class, 'index']);
-Route::get('/profil', [MemberController::class, 'profil']);
+Route::get('/profil/desa', [MemberController::class, 'profildesa']);
+Route::get('/profil/bumdes', [MemberController::class, 'profilbumdes']);
+Route::post('/profil/simpan', [MemberController::class, 'updateprofildesa']);
 Route::get('/join-desa', [MemberController::class, 'joindesa']);
 Route::get('/unit-usaha', [MemberController::class, 'unit_usaha']);
 Route::get('/edukasi', [MemberController::class, 'edukasi']);

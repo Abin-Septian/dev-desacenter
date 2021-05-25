@@ -70,16 +70,6 @@ function onSignInSubmit(){
                             window.location.href = '/dashboard';
                         }, 1500);
                     }
-                    else if(result.status == "belum")
-                    {
-                        $("#notifikasi").html("<div class='alert alert-danger'>"+result.message+"</div>")
-                        $(this).prop("disabled", false);
-
-                        
-                        setTimeout(function(){
-                            window.location.href = '/authRegisterWithEmail';
-                        }, 1500);
-                    }
                     else
                     {
                         $("#notifikasi").html("<div class='alert alert-danger'>"+result.message+"</div>")
@@ -270,7 +260,7 @@ $("#btn-verifikasi").on('click', function(){
         Swal.fire({
             icon: 'error',
             title: 'Gagal Terkirim',
-            text: 'Kode OTP Gagal dikirimkan ke ' + pcode
+            text: 'Kode OTP Gagal dikirimkan ke ' + pcode + '. Karena koneksi anda tidak stabil.'
         });
 
         $("#btn-daftar").hide();

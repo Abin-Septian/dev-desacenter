@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
+    public function __construct(){
+
+
+        //SET VARIABLE GLOBAL MASTER DATA
+        $this->program = DB::table("mst_training as a")
+                         ->where("a.reff_id", "0")
+                         ->get();
+
+    }
+
     //NANDA
     public function index(Request $request){
 
@@ -137,15 +147,15 @@ class MemberController extends Controller
                           ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto")
                           ->where("a.uid", $this->uid)
                           ->get();
-
         $data = array(
-            "member" => $this->member->first()
+            "member" => $this->member->first(),
+            "program" => $this->program
         );
 
         return view("pages.dashboard")->with($data);
     }
 
-    public function profil(Request $request){
+    public function profildesa(Request $request){
         
         if(!$request->session()->has('uid'))
         {
@@ -156,15 +166,58 @@ class MemberController extends Controller
         $this->uid = $request->session()->get("uid");
 
         $this->member = DB::table("mst_member as a")
-                          ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto")
+                          ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto","a.id_instansi")
+                          ->where("a.uid", $this->uid)
+                          ->get();
+
+        $this->desa = DB::table("mst_instansi as a")
+                        ->select(
+                            "a.kode_instansi as kodedesa",
+                            "a.nama_instansi as namadesa",
+                            "d.nama_propinsi as provinsi",
+                            "c.nama_kabupaten as kabupaten",
+                            "b.nama_kecamatan as kecamatan",
+                            "a.nama_kepala as namakepala",
+                            "a.no_wa_kepala as nowakepala",
+                            "a.nama_sekertaris as namasekertaris",
+                            "a.no_wa_sekertaris as nowasekertaris"
+                        )
+                        ->join("mst_kecamatan as b","b.kode_kecamatan", "=", "a.id_kecamatan")
+                        ->join("mst_kabupaten as c", "c.kode_kabupaten", "=", "a.id_kabupaten")
+                        ->join("mst_provinsi as d", "d.kode_propinsi", "=", "a.id_provinsi")
+                        ->where("a.id_instansi", $this->member->first()->id_instansi)
+                        ->get();
+
+        $data = array(
+            "member"  => $this->member->first(),
+            "desa"    => $this->desa->first(),
+            "program" => $this->program
+        );
+        
+        return view('pages.profildesa')->with($data);
+    }
+
+    public function profilbumdes(Request $request)
+    {
+        if(!$request->session()->has('uid'))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        $this->uid = $request->session()->get("uid");
+
+        $this->member = DB::table("mst_member as a")
+                          ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto","a.id_instansi")
                           ->where("a.uid", $this->uid)
                           ->get();
 
         $data = array(
-            "member" => $this->member->first()
+            "member" => $this->member->first(),
+            "program" => $this->program
         );
-        
-        return view('pages.profil')->with($data);
+
+        return view('pages.profilbumdes')->with($data);
     }
 
     public function joindesa(Request $request)
@@ -178,13 +231,6 @@ class MemberController extends Controller
 
         $this->uid = $request->session()->get("uid");
 
-        $this->provinsi = DB::table('mst_provinsi')
-                             ->select(
-                                "kode_propinsi as kode",
-                                "mst_provinsi.nama_propinsi as nama"
-                             )
-                             ->get();
-
         $this->member = DB::table("mst_member as a")
                         ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto")
                         ->where("a.uid", $this->uid)
@@ -196,9 +242,9 @@ class MemberController extends Controller
                                     ->get();
 
         $data = array(
-            "provinsi" => $this->provinsi,
             "isSudahPilih" => $this->isSudahPilihDesa->first(),
-            "member" => $this->member->first()
+            "member" => $this->member->first(),
+            "program" => $this->program
         );
 
         return view('pages.joindesa')->with($data);
@@ -215,42 +261,85 @@ class MemberController extends Controller
 
         $this->input = $request->input();
 
-        $this->instansi = $this->input['iddesa'];
+        $this->kodedesa = $this->input['kodedesa'];
         $this->uid      = $request->session()->get("uid");
 
-        $this->checkMember = DB::table("mst_member as a")
-                             ->where("a.id_instansi", $this->instansi)
-                             ->get();
+        //CHECK APAKAH DESA SUDAH ADA DI TABLE MST_INSTANSI
+        //DATA INSTANSI TIDAK BOLEH DOUBLE
+        $this->isDesaDaftar = DB::table("mst_instansi as a")
+                            ->where("a.kode_instansi", $this->kodedesa)
+                            ->get();
 
-        if($this->checkMember->count() > 0)
+        if($this->isDesaDaftar->count() == 0)
         {
-            DB::table("mst_member as a")
-            ->where("uid", $this->uid)
+           
+
+            $this->iduser = DB::table("mst_member as a")
+                                ->select("a.id")
+                                ->where("a.uid", $request->session()->get("uid"))
+                                ->get()->first();
+
+            $this->desa = DB::table("mst_desa as a")
+                            ->select(
+                                "d.kode_propinsi as kodeprovinsi",
+                                "c.kode_kabupaten as kodekabupaten",
+                                "b.kode_kecamatan as kodekecamatan",
+                                "a.kode_desa as kodedesa",
+                                "a.nama_desa as namadesa"
+                            )
+                            ->join("mst_kecamatan as b", "b.kode_kecamatan", "=", "a.kode_kecamatan")
+                            ->join("mst_kabupaten as c", "c.kode_kabupaten", "=", "b.kode_kabupaten")
+                            ->join("mst_provinsi as d", "d.kode_propinsi", "=", "c.kode_propinsi")
+                            ->where("a.kode_desa", $this->kodedesa)
+                            ->get()->first();
+
+            $data = array(
+                "id_provinsi"   => $this->desa->kodeprovinsi,
+                "id_kabupaten"  => $this->desa->kodekabupaten,
+                "id_kecamatan"  => $this->desa->kodekecamatan,
+                "kode_instansi" => $this->desa->kodedesa,
+                "nama_instansi" => $this->desa->namadesa,
+                "created_at"    => date("Y-m-d H:i:s"),
+                "user_entry"    => $this->iduser->id
+            );
+
+            DB::table("mst_instansi")
+                ->insert($data);
+
+            //MENDAPATKAN ID INSTANSI
+            $id = DB::getPdo()->lastInsertId();
+
+            //INSERT TABLE INSTANSI DET
+            DB::table("mst_instansi_det")
+                ->insert([
+                    "id_instansi" => $id
+                ]);
+
+            //UPDATE TABLE MST MEMBER => ID INSTANSI
+            DB::table("mst_member")
+            ->where("uid", $request->session()->get("uid"))
             ->update([
-                'id_instansi' => $this->instansi,
-                'is_admin' => 0,
-                'approved' => 0
+            "id_instansi" => $id
             ]);
         }
         else
         {
-
-            DB::table("mst_member as a")
-            ->where("uid", $this->uid)
-            ->update([
-                'id_instansi' => $this->instansi,
-                'is_admin' => 1,
-                'approved' => 1
-            ]);
-
+        
+            //UPDATE TABLE MST MEMBER => ID INSTANSI
+            DB::table("mst_member")
+                ->where("uid", $request->session()->get("uid"))
+                ->update([
+                "id_instansi" => $this->isDesaDaftar->first()->id_instansi
+                ]);
         }
 
         $this->response = array(
-            "status" => true,
-            "message" => "Data telah berhasil disimpan."
+            "status"  => true
         );
 
         echo json_encode($this->response);
+        
+        
     }
 
     public function profilAkun(Request $request)
@@ -273,9 +362,12 @@ class MemberController extends Controller
                         ->where("a.uid", $this->uid)
                         ->get();
 
+        
+
         $data = array(
             "response" => $this->result->first(),
-            "member"   => $this->member->first()
+            "member"   => $this->member->first(),
+            "program"  => $this->program
         );
 
         return view("pages.profilakun")->with($data);
@@ -287,6 +379,11 @@ class MemberController extends Controller
 
         $this->input = $request->input();
         $name = "";
+
+        $request->validate([
+            "nama"  => "required",
+            "email" => "required|email"
+        ]);
 
         $this->nama   = $this->input['nama'];
         $this->email  = $this->input['email'];
@@ -314,9 +411,46 @@ class MemberController extends Controller
                ->where("uid", $this->uid)
                ->update($data);
 
-        return redirect("/profil/akun")->with("status", "Data Berhasil diupdate.");
 
+        $this->member = DB::table("mst_member")
+                          ->where("uid", $request->session()->get("uid"))
+                          ->get();
+
+        if($this->member->first()->id_instansi != NULL)
+        {
+            return redirect("/profil/akun")->with("status", "Data Berhasil diupdate.");
+        
+        }
+        else
+        {
+            return redirect("/profil/akun")->with("status", "Data Berhasil diupdate. Silahkan gabung desa sekarang agar dapat mengikuti program desacenter.id yang telah disediakan. Klik tombol disamping untuk Gabung desa. ")
+                                           ->with("button", "ada");
+        }
     }
 
+    public function updateprofildesa(Request $request)
+    {
+        $this->input = $request->input();
+        $this->uid   = $request->session()->get("uid");
 
+        $request->validate([
+            "namakepala" => "required",
+            "nowakepala" => "required",
+        ]);
+
+        $this->member = DB::table("mst_member as a")
+                          ->where("a.uid", $this->uid)
+                          ->get()->first();
+
+        DB::table("mst_instansi as a")
+          ->where("a.id_instansi", $this->member->id_instansi)
+          ->update([
+              "nama_kepala"     => $this->input['namakepala'],
+              "no_wa_kepala"    => "+62".$this->input['nowakepala'],
+              "nama_sekertaris" => $this->input['namasekertaris'],
+              "no_wa_sekertaris"     => "+62".$this->input['nowasekertaris']
+          ]);
+
+        return redirect("/profil/desa")->with("status", "Data informasi desa berhasil diupdate.");
+    }
 }
