@@ -31,15 +31,15 @@
 ***********************************-->
 <div class="content-body">
     <div class="container-fluid">
-        <div class="row page-titles" style="margin-bottom:4rem !important;">
+        <div class="row page-titles" style="margin-bottom:4rem !important; background:#ffd656 !important;">
             <div class="col p-0">
                 <h5>Profil Desa</h5>
             </div>
             <div class="col p-0">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a>
+                    <li class="breadcrumb-item"><a style="color:#000 !important" href="javascript:void(0)">Layout</a>
                     </li>
-                    <li class="breadcrumb-item active">Blank</li>
+                    <li style="color:#000 !important" class="breadcrumb-item active">Blank</li>
                 </ol>
             </div>
             

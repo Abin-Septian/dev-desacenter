@@ -110,4 +110,42 @@ class MasterController extends Controller
         }
         echo json_encode($this->response);
     }
+
+
+    public function kodebumdes(Request $request)
+    {
+        $this->input = $request->input();
+
+        $this->noRegBumdes = $this->input['kodebumdes'];
+
+        $this->checkBumdes = DB::table("mst_bumdes as a")
+                             ->where("a.kode_bumdes", $this->noRegBumdes)
+                             ->get();
+        
+        if($this->checkBumdes->count() > 0)
+        {
+            $this->bumdes = $this->checkBumdes->first();
+
+            $this->result = array(
+                "idbumdes" => $this->bumdes->id_bumdes,
+                "kodebumdes" => $this->bumdes->kode_bumdes,
+                "namabumdes" => $this->bumdes->nama_bumdes
+            );
+
+            $this->response = array(
+                "status" => true,
+                "data"   => $this->result
+            );
+
+        }
+        else
+        {
+            $this->response = array(
+                "status" => false,
+                "data"   => array()
+            );
+        }
+
+        echo json_encode($this->response);
+    }
 }

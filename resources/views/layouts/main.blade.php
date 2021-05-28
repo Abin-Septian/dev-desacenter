@@ -13,6 +13,7 @@
     <!-- Custom Stylesheet -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     
+    
 </head>
 
 <body>
@@ -20,13 +21,13 @@
     <!--*******************
         Preloader start
     ********************-->
-    {{-- <div id="preloader">
+    <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
                 <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
             </svg>
         </div>
-    </div> --}}
+    </div>
     <!--*******************
         Preloader end
     ********************-->
@@ -41,7 +42,12 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <div class="brand-logo"><a href="{{"/"}}"><b><img src="../../assets/images/logo.png" alt=""> </b><span class="brand-title"><img src="../../assets/images/logo-text.png" alt=""></span></a>
+            <div class="brand-logo">
+                <a href="#">
+                    <b>
+                        <img style="width:100px" src="{{ asset('assets/images/dsc_logo.png') }}" alt="">
+                    </b>
+                </a>
             </div>
             <div class="nav-control">
                 <div class="hamburger"><span class="line"></span>  <span class="line"></span>  <span class="line"></span>
@@ -55,7 +61,7 @@
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header">    
+        <div class="header" style="background-color:#fff3cd !important;">    
             <div class="header-content">
                 <div class="header-left">
                         {{-- masih kosong --}}
@@ -64,13 +70,13 @@
                     <ul>
                         <li class="icons">
                             <a href="javascript:void(0)" class="log-user">
-                                <img src="../../assets/images/avatar/1.jpg" alt=""> <span style="text-transform:capitalize">{{ $member->nama }}</span>  <i class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
+                                <span style="color:#000; text-transform:capitalize">{{ $member->nama }}</span>  <i style="color:#000 !important;" class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
                             </a>
                             <div class="drop-down dropdown-profile animated bounceInDown">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><a href="{{ url('/profil/akun') }}"><i class="icon-power"></i> <span>Akun Anda</span></a></li>
-                                        <li><a href="#" onclick="signOut()"><i class="mdi mdi-power text-danger"></i> Logout</a></li>
+                                        <li><a href="{{ url('/profil/akun') }}"><i style="color:#000 !important;" class="icon-user"></i> <span>Akun Anda</span></a></li>
+                                        <li><a href="#" onclick="signOut()"><i style="color:red !important;" class="mdi mdi-power text-danger"></i> Logout</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -183,6 +189,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
     <script src="{{ asset('assets/js/firebase.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    @yield('script')
 </body>
 
 </html>

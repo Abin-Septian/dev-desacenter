@@ -20,6 +20,7 @@ use App\Http\Controllers\MasterController;
 Route::get('/', [MemberController::class, 'index']);
 Route::get('/profil/desa', [MemberController::class, 'profildesa']);
 Route::get('/profil/bumdes', [MemberController::class, 'profilbumdes']);
+Route::get('/profil/info-bumdes', [MemberController::class, 'infobumdes']);
 Route::post('/profil/simpan', [MemberController::class, 'updateprofildesa']);
 Route::get('/join-desa', [MemberController::class, 'joindesa']);
 Route::get('/unit-usaha', [MemberController::class, 'unit_usaha']);
@@ -45,12 +46,17 @@ Route::post('/daftarUserByEmail', [AuthController::class, 'daftarUserByEmail']);
 Route::post('/postJoinDesa', [MemberController::class, 'postJoinDesa']);
 Route::get('/profil/akun', [MemberController::class, 'profilAkun']);
 Route::post('/profil/update', [MemberController::class, 'updateProfil']);
+Route::post('/profil/updatebumdes', [MemberController::class, 'updateProfilBumdes']);
 Route::get('/dashboard', [MemberController::class, 'dashboard']);
+Route::get('/program/detail/{idprogram}', [MemberController::class, 'detailprogram']);
+Route::get('/program/ikut/{idprogram}', [MemberController::class, 'ikutprogram']);
+Route::get('/program/home/{idprogram}', [MemberController::class, 'homeprogram']);
 
 //GET MASTER DATA
 Route::post('/getMaster/kabupaten', [MasterController::class, 'kabupaten']);
 Route::post('/getMaster/kecamatan', [MasterController::class, 'kecamatan']);
 Route::post('/getMaster/desa', [MasterController::class, 'desa']);
+Route::post('/getMaster/kodebumdes', [MasterController::class, 'kodebumdes']);
 
 
 

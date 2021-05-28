@@ -52,9 +52,10 @@
     }
 
     .text-step{
-        padding:0px 15px;
+        padding:5px 15px;
         color:#000;
         font-size:13px;
+        color:#fff;
         text-align: center;
     }
 
@@ -66,21 +67,39 @@
         font-size:12px;
         padding:5px 10px;
     }
+
+    .box-poster{
+        height:60px;
+    }
+
+    .box-program{
+        border-radius:8px;
+        overflow: hidden;
+        box-shadow:1px 1px 10px #ccc;
+        background:#fff3cd !important;
+        padding:5px 0px;
+    }
+
+    .text-addon{
+        text-align:left;
+        color:#555;
+        font-size:13px;
+    }
 </style>
 <!--**********************************
     Content body start
 ***********************************-->
 <div class="content-body">
     <div class="container-fluid">
-        <div class="row page-titles" style="margin-bottom:4rem !important;">
+        <div class="row page-titles" style="margin-bottom:4rem !important; background:#ffd656 !important;">
             <div class="col p-0">
                 <h5>Dashboard</h5>
             </div>
             <div class="col p-0">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a>
+                <ol class="breadcrumb" >
+                    <li class="breadcrumb-item"><a style="color:#000 !important;" href="javascript:void(0)">Layout</a>
                     </li>
-                    <li class="breadcrumb-item active">Blank</li>
+                    <li style="color:#000 !important;" class="breadcrumb-item active">Blank</li>
                 </ol>
             </div>
             
@@ -104,7 +123,14 @@
                                     <div class="rows">
                                         <div class="box-step">
                                             <div style="color:#000;">Silahkan lengkapi profil Berikut ini : </div>
+                                            @php
+                                                $step1 = ($step['profil']['status'] == true) ? "green" : "red";
+                                                $step2 = ($step['joindesa']['status'] == true) ? "green" : "red";
+                                                $step3 = ($step['profildesa']['status'] == true) ? "green" : "red";
+                                                $step4 = ($step['profilbumdes']['status'] == true) ? "green" : "red";
 
+                                                
+                                            @endphp
                                             <div class="box-steps">
                                                 <div class="d-flex flex-row bd-highlight mb-3">
                                                     <div class="bd-highlight box-steps">
@@ -113,7 +139,7 @@
                                                             <div class="border-dot"></div>
                                                         </div>
                                                         <div style="clear:both;"></div>
-                                                        <div class="text-step">Profil</div> 
+                                                        <div style="background:<?php echo $step1 ?>;" class="text-step">Profil</div> 
                                                     </div>
                                                     <div class="bd-highlight box-steps">
                                                         <div class="box-relative">
@@ -121,15 +147,15 @@
                                                             <div class="border-dot"></div>
                                                         </div>
                                                         <div style="clear:both;"></div>
-                                                        <div class="text-step">Join Desa</div>
+                                                        <div style="background:<?php echo $step2 ?>;" class="text-step">Join Desa</div>
                                                     </div>
                                                     <div class="bd-highlight box-steps">
                                                         <div class="box-relative">
-                                                            <div style="left:60px;" class="dot"></div>
+                                                            <div style="left:40px;" class="dot"></div>
                                                             <div class="border-dot"></div>
                                                         </div>
                                                         <div style="clear:both;"></div>
-                                                        <div class="text-step">Informasi Desa</div> 
+                                                        <div style="background:<?php echo $step3 ?>;" class="text-step text-center">Profil Desa</div> 
                                                     </div>
                                                     <div class="bd-highlight box-steps">
                                                         <div class="box-relative">
@@ -137,10 +163,10 @@
                                                             <div class="border-dot"></div>
                                                         </div>
                                                         <div style="clear:both;"></div>
-                                                        <div class="text-step">Assesment</div> 
+                                                        <div style="background:<?php echo $step4 ?>;" class="text-step">Profil Bumdes</div> 
                                                     </div>
                                                     <div class="bd-highlight box-steps" style="padding:10px;">
-                                                        <button class="btn btn-xs btn-info">Lengkapi Profil</button>
+                                                        <a type="button" href="{{ url('profil/akun') }}" class="btn btn-xs btn-info">Lengkapi Profil</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,10 +174,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <h5>Informasi Desacenter.id</h5>
+                                    <h5>Kelengkapan Dokumen</h5>
 
-                                    <div class="">
-                                        In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available
+                                    <div class="alert alert-danger" style="font-size:14px;">
+                                        Anda belum melengkapi dokumen Surat Kesediaan. 
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +185,71 @@
                     </div>
                 </div>
             </div> <!-- endcol-->
+        </div>
 
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row" style="border-bottom:1px dashed #ccc; margin-bottom:15px;">
+                            <div class="col-lg-6">
+                                <h5 style="font-size:13px;">Addon Program</h5>
+                            </div>
+                            <div class="col-lg-6 text-right">
+                                <a style="font-size:13px;" href="#">Lihat Semua</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        @if(count($program) > 0)
+                            @foreach($program as $dataprogram)
+                            
+                            <div class="col-lg-4">
+                                <div class="box-program">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="box-poster text-center">
+                                                <img class="rounded-circle" src="{{ $dataprogram->banner }}" style="width:60px; height:60px;"/>
+                                            </div>
+                                              
+                                        </div>
+                                        <div class="col-lg-8" style="padding-left:0px;">
+                                            <div style="padding:5px;">
+                                                <div class="text-addon">{{ $dataprogram->nama }}</div>
+                                                <div class="text-addon">
+                                                     
+                                                    <span class="mdi mdi-calendar-clock"></span>
+                                                    Tanggal
+                                                    {{ date("d M Y", strtotime($dataprogram->tanggal)) }}
+                                                    
+                                                </div>
+                                                <div class="text-addon">
+                                                    
+                                                    <span class="mdi mdi-account-circle"></span>
+                                                    Yang mengikuti
+                                                    {{ $dataprogram->jml }} Peserta
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <a type="button" href="{{ url('program/detail/'.$dataprogram->id) }}" style="padding:2px 10px;">Ikuti Program</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            @endforeach
+                        @else
+                            kosong
+                        @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -189,10 +279,10 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                            @if( Session::has('uid') )
-                                <img id="img" style="width:100px;height:90px; border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$member->foto)) }}" data-holder-rendered="true">
+                            @if( $member->foto != "" )
+                                <img id="img" style="width:100px;height:100px; border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$member->foto)) }}" data-holder-rendered="true">
                             @else
-                                <img id="img" style="width:100px;height:90px; border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
+                                <img id="img" style="width:100px;height:100px; border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
                             @endif
                             </div>
                         </div>
@@ -205,9 +295,9 @@
                                             Silahkan update profil anda jika anda belum mengisi data profil.
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <!--<div class="col-lg-4">
                                         <a href="{{ url('profil/akun') }}" type="button" class="btn btn-xs btn-info">Edit Profil</a>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -225,34 +315,23 @@
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Perlu Bantuan ?</h5>
-                        <div>Sampaikan keluhan atau bantuan yang anda butuhkandi sini.</div>
-                        <br>
-                        <div class="text-right">
-                            <button class="btn btn-xs btn-info">Bantuan</button>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Gabung Desa</h5>
-
-                        <div>Silahkan gabung desa sesuai dengan desa anda saat ini.</div>
-                        <br>
+                        <h5>Perlu Bantuan ?</h5>
+                        <div>Sampaikan keluhan atau bantuan yang anda butuhkan disini</div><br>
                         <div class="text-right">
-                            <a type="button" href="{{ url('/join-desa') }}" class="btn btn-xs btn-info">Gabung desa</a>
+                            <button class="btn btn-xs btn-warning">Bantuan</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <!--<div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
@@ -275,7 +354,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
     <!-- #/ container -->
 </div>
