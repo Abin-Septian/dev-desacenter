@@ -63,8 +63,8 @@
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="far fa-chart-bar"></i> APA ITU DESACENTER</h6>
                             <div class="iconbox-content-body">
-                                <p>Penjelasan singkat</p>
-                                <a class="btn btn-inline read-more-btn" href="#"><i class="fas fa-plus-square"></i> Read More</a>
+                                
+                                <a class="btn btn-inline read-more-btn" href="{{ url('apa') }}"><i class="fas fa-plus-square"></i> Read More</a>
                             </div>
                         </div>
                     </div>

@@ -26,6 +26,13 @@ class MemberController extends Controller
         return view('layoutmain.main');
     }
 
+    public function apa(Request $request){
+
+        
+       
+        return view('layoutsubmain.layoutsub');
+    }
+
 
     public function login1(Request $request){
 
