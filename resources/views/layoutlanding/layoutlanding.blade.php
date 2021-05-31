@@ -79,6 +79,7 @@
 #rcard {
   border-radius: 15px 15px 15px 15px; 
 }
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 </style>
 </head>
 <body>
@@ -111,7 +112,7 @@
      </div>
      <!-- End Search Modal -->
     <!-- Start Header Area -->
-    <div class="header-area">
+    <div class="header-area ">
         <div class="container">
             <div class="header-wrapper">
                 <div class="row">
@@ -128,7 +129,6 @@
                             <ul class="main-menu" id="mobile-menu">
                                 <li class="active"><a href="{{url('/')}}">Home</a></li>
                                 <li><a href="#feature">Features</a></li>
-                                <!-- <li><a href="#portfolio">Portfolio</a></li> -->
                                 <li><a href="#page">Pages</a></li>
                                 <li><a href="#blog">Blog</a></li>
                                 <li><a href="#contact-us">Contact Us</a></li>
@@ -243,7 +243,7 @@
     </div>
     <!-- End Copyright Area -->
 <!-- JS -->
-
+    
    <!-- Popper.js -->
    <script src="{{asset('assetslanding/js/popper.min.js')}}"></script>
    <!-- Bootstrap.js -->
