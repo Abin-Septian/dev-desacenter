@@ -109,20 +109,21 @@
                             <div class="form-group row align-item-center">
                                 <label class="col-lg-2 col-form-label text-label">Unit Usaha</label>
                                 <div class="col-lg-8" style="color:#000;">
-                                    
 
                                     @foreach($unitusaha as $unit)
                                         @php
-                                            $units = json_decode($bumdes->unit_usaha, true);
+                                            $units = (strlen($bumdes->unit_usaha) > 0) ? json_decode($bumdes->unit_usaha, true) : array();
 
-                                            if(in_array($unit->id_unit_usaha, $units))
-                                            {
-                                                $checked = "checked";
-                                            }
-                                            else
-                                            {
-                                                $checked = "";
-                                            }
+
+                                                if(in_array($unit->id_unit_usaha, $units))
+                                                {
+                                                    $checked = "checked";
+                                                }
+                                                else
+                                                {
+                                                    $checked = "";
+                                                }
+                                            
 
                                         @endphp
                                         <div class="custom-control custom-checkbox">

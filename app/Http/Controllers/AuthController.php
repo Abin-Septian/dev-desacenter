@@ -128,8 +128,10 @@ class AuthController extends Controller
         }
         else
         {
-            return $pin;
+            $pin = $pin;
         }
+
+        return $pin;
     }
 
     public function authLogin__(Request $request)

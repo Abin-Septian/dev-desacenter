@@ -31,7 +31,49 @@ $(document).ready(function(){
         window.recaptchaWidgetId = widgetId;
     });
 
+    $("#google").on("click", function(){
+        
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+            /** @type {firebase.auth.OAuthCredential} */
+            var credential = result.credential;
+
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            
+            $.ajax({
+                url : "/auth/google",
+                type : "POST",
+                dataType : "JSON",
+                data : {
+                    
+                }
+            });
+            // ...
+        }).catch((error) => {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+
+            console.log(error.code);
+            // ...
+        });
+
+    
+    })
+    
+
 });
+
+
 
 
 function onSignInSubmit(){
@@ -58,7 +100,8 @@ function onSignInSubmit(){
                 },
                 beforeSend : function(xhr)
                 {
-                    $(this).prop("disabled", true);
+                    
+                    $("#btn-masuk").prop("disabled", true);
                 },
                 success : function(result, status, xhr)
                 {
@@ -72,7 +115,7 @@ function onSignInSubmit(){
                     }
                     else
                     {
-                        $("#notifikasi").html("<div class='alert alert-danger'>"+result.message+"</div>")
+                        $("#notifikasi").html("<div class='alert alert-success'>"+result.message+"</div>")
                         $(this).prop("disabled", false);
                     }
                 },

@@ -56,7 +56,8 @@
                                 <div class="text-center">
                                     <h5 class="mb-5">Atau masuk dengan</h5>
                                     <ul class="list-inline">
-                                        <li class="list-inline-item m-t-10"><a href="{{ url('google') }}" class="btn btn-google-plus"><i class="fa fa-google-plus"></i> Google</a>
+                                        <li class="list-inline-item m-t-10">
+                                            <button id="google" type="button" class="btn btn-google-plus"><i class="fa fa-google-plus"></i> Google</button>
                                         </li>
                                     </ul>
                                     <p class="mt-5">Belum punya akun? <a href="{{url('/register')}}">Daftar Sekarang</a>
