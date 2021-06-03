@@ -111,6 +111,8 @@
       color: inherit;
    }
    h1 {
+    
+    
       font-size: 40px;
    }
    h2 {
@@ -286,7 +288,7 @@
    /* start owl-carousel */
    .owl-carousel .owl-nav button {
       position: absolute;
-      background: #999 !important;
+      background: #00498f !important;
       color: #f07f00 !important;
       border-radius: 2px;
       height: 30px;
@@ -352,7 +354,14 @@
 }
 .header-area {
     border-top: 5px solid #004a95;
-    padding: 30px 0;
+    
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 9;
+    top: 0%;
+    background: rgba(255, 255, 255);
+   
 }
 .main-menu li.search-trigger a {
     border-left: 1px solid #666666;
@@ -534,8 +543,10 @@
 
 
 .single-slider {
-    height: 600px;
-    background-size: cover;
+    height: 500px;
+    margin-top: 80px;
+    background-repeat: no-repeat;
+    background-size:  cover;
     background-position: center;
     background-color: #cccccc;
     display: table;

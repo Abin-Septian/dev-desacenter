@@ -11,16 +11,16 @@
                 <div class="col-12">
                     <div class="slider-carousel owl-carousel">
                         <div class="single-slider slider-bg-1 text-center">
-                            <div class="slider-inner">
-                                <!-- <h1>WELCOME TO BE-ONE</h1>
-                                ><h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa cum sociic</h5> -->
-                                <a class="btn get-started-btn rounded" href="{{ url('login') }}">Get Started</a>
+                            <div class="slider-inner ">
+                                <h3 style="text-shadow: 2px 2px #000000; font-family: 'Roboto', sans-serif;">Pendaftaran Desabrilian</h3>
+                                <!-- <h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa cum sociic</h5> -->
+                                <a class="btn get-started-btn rounded" href="{{ url('login') }}">Daftar Sekarang</a>
                             </div>
                         </div>
                         <div class="single-slider slider-bg-2 text-center">
                             <div class="slider-inner">
-                                <!-- <h1>Free MULTIPURPSE TEMPLATE</h1>
-								<h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis n</h5 -->
+                            <h3 >Pendaftaran Desabrilian</h3>
+								<h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis n</h5> -->
 >                                <a class="btn get-started-btn rounded"  href="{{ url('login') }}">Get Started</a>
                             </div>
                         </div>
@@ -38,12 +38,12 @@
     </div>
     <!-- End Slider Area -->
     <!-- Start Hire Us Area -->
-    <div class="hire-us-area theme-bg js--sticky-menu">
+    <!-- <div class="hire-us-area theme-bg js--sticky-menu">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-md-9 col-12 mt-2">
                     <div class="hire-us-content">
-                    <!-- <span>100+</span>  -->
+                    
                         <h6>Bergabung Sekarang Bersama Kami di Desacenter.id</h6> 
                     </div>  
                 </div>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- End Hire Us Area -->
     <!-- Start Icon Box Area -->
     <div class="icon-box-area pt-70 pb-70" id="feature">
@@ -63,8 +63,8 @@
                         <div class="icon-box-content">
                             <h6 class="iconbox-content-heading"><i class="far fa-chart-bar"></i> APA ITU DESACENTER</h6>
                             <div class="iconbox-content-body">
-                                <p>Penjelasan singkat</p>
-                                <a class="btn btn-inline read-more-btn" href="#"><i class="fas fa-plus-square"></i> Read More</a>
+                                
+                                <a class="btn btn-inline read-more-btn" href="{{ url('apa') }}"><i class="fas fa-plus-square"></i> Read More</a>
                             </div>
                         </div>
                     </div>

@@ -18,6 +18,7 @@ use App\Http\Controllers\MasterController;
 */
 
 Route::get('/', [MemberController::class, 'index']);
+Route::get('/apa', [MemberController::class, 'apa']);
 Route::get('/profil/desa', [MemberController::class, 'profildesa']);
 Route::get('/profil/bumdes', [MemberController::class, 'profilbumdes']);
 Route::get('/profil/info-bumdes', [MemberController::class, 'infobumdes']);
