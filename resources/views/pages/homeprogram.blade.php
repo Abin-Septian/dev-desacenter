@@ -26,7 +26,7 @@
 ***********************************-->
 <div class="content-body">
     <div class="container-fluid">
-        <div class="row page-titles" style="margin-bottom:4rem !important; background:#ffd656 !important;">
+        <div class="row page-titles" style="margin-bottom:4rem !important; background:#f3f6f9 !important;">
             <div class="col p-0">
                 <h5>Home Program</h5>
             </div>

@@ -32,12 +32,15 @@
                                 <form class="mt-5 mb-5">
 
                                     @csrf
+                                    <div class="alert alert-warning" style="font-size:12px;">
+                                        Kode OTP akan dikirim melalui SMS. Pastikan Nomor Telepon anda valid dan aktif.
+                                    </div>
                                     <div class="form-group" id="form-phone">
                                         <label>Nomor Telepon</label>
                                         <div>
                                             <div class="input-group">
                                                 <div class="input-group-append bg-custom b-0"><span class="input-group-text">+62</span></div>
-                                                <input type="tel" class="form-control" placeholder="81234567890"  onblur="return $(this).val(parseInt($(this).val()))" name="phone" id="phone">
+                                                <input type="tel" class="form-control" placeholder="81234567890"  onblur="$(this).val(Number($(this).val()))" name="phone" id="phone">
                                             </div><!-- input-group -->
                                         </div>
                                     </div>
@@ -47,8 +50,8 @@
                                     </div>
 
                                     <div class="text-center mb-4 mt-4">
-                                        <a href="#" class="btn btn-primary" id="btn-masuk"> Masuk</a>
-                                        <a href="#" class="btn btn-primary" id="btn-verifikasi"> Verifikasi</a>
+                                        <button type="button" class="btn btn-primary" id="btn-masuk"> Masuk</button>
+                                        <button type="button" class="btn btn-primary" id="btn-verifikasi"> Verifikasi</button>
                                     </div>
 
                                     <div class="recaptcha-container" id="recaptcha-container" style="display: none;"></div>
@@ -56,8 +59,7 @@
                                 <div class="text-center">
                                     <h5 class="mb-5">Atau masuk dengan</h5>
                                     <ul class="list-inline">
-                                        <li class="list-inline-item m-t-10">
-                                            <button id="google" type="button" class="btn btn-google-plus"><i class="fa fa-google-plus"></i> Google</button>
+                                        <li class="list-inline-item m-t-10"><a type="button" onclick="return alert('Maaf fitur ini masih dalam pengembangan.') " class="btn btn-google-plus"><i class="fa fa-google-plus"></i> Google</a>
                                         </li>
                                     </ul>
                                     <p class="mt-5">Belum punya akun? <a href="{{url('/register')}}">Daftar Sekarang</a>

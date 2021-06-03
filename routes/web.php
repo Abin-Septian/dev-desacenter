@@ -51,6 +51,12 @@ Route::get('/dashboard', [MemberController::class, 'dashboard']);
 Route::get('/program/detail/{idprogram}', [MemberController::class, 'detailprogram']);
 Route::get('/program/ikut/{idprogram}', [MemberController::class, 'ikutprogram']);
 Route::get('/program/home/{idprogram}', [MemberController::class, 'homeprogram']);
+Route::get('/program/syaratketentuan/{idprogram}', [MemberController::class, 'syaratketentuan']);
+Route::get('/program/invitepeserta/{idprogram}', [MemberController::class, 'invitepeserta']);
+Route::post('/program/tambahpeserta', [MemberController::class, 'tambahpeserta']);
+Route::post('/program/simpanpeserta/{idprogram}', [MemberController::class, 'simpanpeserta']);
+Route::get('/program/success/{idprogram}', [MemberController::class, 'success']);
+Route::get('/program/form/{idprogram}', [MemberController::class, 'formkesediaan']);
 
 //GET MASTER DATA
 Route::post('/getMaster/kabupaten', [MasterController::class, 'kabupaten']);

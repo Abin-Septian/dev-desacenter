@@ -74,25 +74,63 @@ class MasterController extends Controller
     {
         $this->input = $request->input();
 
-        $this->result = DB::table('mst_desa as a')
-                           ->select('a.kode_desa as kode',
-                                    'a.nama_desa as nama', 
-                                    'a.id_desa as id',
-                                    'b.nama_kecamatan as kecamatan',
-                                    'c.nama_kabupaten as kabupaten',
-                                    'd.nama_propinsi as provinsi')
-                           ->join('mst_kecamatan as b', 'b.kode_kecamatan', '=', 'a.kode_kecamatan')
-                           ->join('mst_kabupaten as c', 'c.kode_kabupaten', '=', 'b.kode_kabupaten')
-                           ->join('mst_provinsi as d', 'd.kode_propinsi', '=', 'c.kode_propinsi')
-                           ->where('kode_desa', $this->input['kodedesa'])
-                           ->get();
+        $strWhere = [];
 
-        $this->jmlMember = DB::table('mst_instansi as a')
-                              ->join('mst_member as b', 'b.id_instansi', '=', 'a.id_instansi')
-                              ->where('a.kode_instansi', $this->input['kodedesa'])
-                              ->get();
+        $kodedesa = $this->input['kodedesa'];
+        $namadesa = $this->input['namadesa'];
 
-        if($this->result->count() == 0)
+        if($kodedesa != "")
+        {
+            $where = " a.kode_desa LIKE '".$this->input['kodedesa']."%'";
+
+            array_push($strWhere, $where);
+        }
+
+        if($namadesa != "")
+        {
+            $where = " a.nama_desa LIKE '%".$this->input['namadesa']."%'";
+
+            array_push($strWhere, $where);
+        }
+
+        $SubWhere = implode(" AND ", $strWhere);
+
+        $this->result = DB::select("SELECT 
+        a.kode_desa as kode,
+        a.nama_desa as nama,
+        a.id_desa as id,
+        b.nama_kecamatan as kecamatan,
+        c.nama_kabupaten as kabupaten,
+        d.nama_propinsi as provinsi,
+        (SELECT COUNT(bb.id) FROM mst_instansi as aa 
+        JOIN mst_member as bb ON bb.id_instansi = aa.id_instansi
+        WHERE aa.kode_instansi = a.kode_desa) as jml
+        FROM mst_desa as a
+        JOIN mst_kecamatan as b ON b.kode_kecamatan = a.kode_kecamatan
+        JOIN mst_kabupaten as c ON c.kode_kabupaten = b.kode_kabupaten
+        JOIN mst_provinsi as d ON d.kode_propinsi = c.kode_propinsi
+        WHERE $SubWhere");
+
+        // $this->result = DB::table('mst_desa as a')
+        //                    ->select('a.kode_desa as kode',
+        //                             'a.nama_desa as nama', 
+        //                             'a.id_desa as id',
+        //                             'b.nama_kecamatan as kecamatan',
+        //                             'c.nama_kabupaten as kabupaten',
+        //                             'd.nama_propinsi as provinsi',
+        //                             "(SELECT COUNT(aa.id_member) FROM mst_instansi as aa WHERE aa.kode_instansi LIKE '".$this->input['kodedesa']."%') as jml")
+        //                    ->join('mst_kecamatan as b', 'b.kode_kecamatan', '=', 'a.kode_kecamatan')
+        //                    ->join('mst_kabupaten as c', 'c.kode_kabupaten', '=', 'b.kode_kabupaten')
+        //                    ->join('mst_provinsi as d', 'd.kode_propinsi', '=', 'c.kode_propinsi')
+        //                    ->when($this->input['kodedesa'] != "", function($query, $kodedesa){
+        //                         return $query->where('a.kode_desa', 'LIKE', $this->input['kodedesa'].'%');
+        //                    })
+        //                    ->when($this->input['namadesa'] != "", function($query, $namadesa){
+        //                         return $query->where('a.nama_desa', 'LIKE', '%'.$this->input['namadesa'].'%');
+        //                    })
+        //                    ->get();
+
+        if(count($this->result) == 0)
         {
             
             $this->response = array(
@@ -104,8 +142,7 @@ class MasterController extends Controller
         {
             $this->response = array(
                 "status" => true,
-                "data"   => $this->result,
-                "jmlMember" => $this->jmlMember->count()
+                "data"   => $this->result
             );
         }
         echo json_encode($this->response);

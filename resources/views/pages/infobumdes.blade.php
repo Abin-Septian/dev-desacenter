@@ -17,7 +17,7 @@
 ***********************************-->
 <div class="content-body">
     <div class="container-fluid">
-        <div class="row page-titles" style="margin-bottom:4rem !important; background:#ffd656 !important;">
+        <div class="row page-titles" style="margin-bottom:4rem !important; background:#f3f6f9 !important;">
             <div class="col p-0">
                 <h5>Informasi Bumdes</h5>
             </div>
@@ -49,7 +49,7 @@
                             </div>
 
                             @csrf
-                            <div class="form-group row align-item-center">
+                            <div class="form-group row align-item-center sr-only">
                                 <label class="col-lg-2 col-form-label text-label">Nomor Reg. Bumdes</label>
                                 <div class="col-lg-8">
                                     <div class="input-group">
@@ -71,7 +71,7 @@
                                 <label class="col-lg-2 col-form-label text-label">Nama Bumdes</label>
                                 <div class="col-lg-8">
                                     <div class="input-group">
-                                        <input value="{{ old('namabumdes', $bumdes->nama_bumdes) }}" placeholder="Nama Bumdes" readonly class="@error('namabumdes') is-invalid @enderror form-control" name="namabumdes" type="text" />
+                                        <input value="{{ old('namabumdes', $bumdes->nama_bumdes) }}" placeholder="Nama Bumdes" class="@error('namabumdes') is-invalid @enderror form-control" name="namabumdes" type="text" />
                                     </div>
 
                                     @error('namabumdes')
@@ -80,9 +80,7 @@
                                     </div>
                                     @enderror
 
-                                    <div style="padding:5px; margin-top:10px;" class="alert-warning">
-                                        <span class="mdi mdi-information"></span> Nama bumdes akan muncul secara otomatis jika kode bumdes anda benar.</a>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -92,7 +90,11 @@
                                     <div class="input-group">
                                         <textarea name="alamatbumdes" class="form-control" rows="6">{{ old('alamatbumdes', $bumdes->alamat_bumdes) }}</textarea>
                                     </div>
-                                    
+                                    @error('alamatbumdes')
+                                    <div class="alert-danger" style="padding:5px; font-size:14px; margin-top:10px;">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
 

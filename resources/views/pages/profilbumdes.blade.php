@@ -6,7 +6,7 @@
 ***********************************-->
 <div class="content-body">
     <div class="container-fluid">
-        <div class="row page-titles" style="margin-bottom:4rem !important; background:#ffd656 !important;">
+        <div class="row page-titles" style="margin-bottom:4rem !important; background:#f3f6f9 !important;">
             <div class="col p-0">
                 <h5>Profil Bumdes</h5>
             </div>
@@ -21,32 +21,34 @@
         </div>
 
         @if($isIsiBumdes == 0)
-        
         <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="alert alert-danger">
-                            Maaf anda belum melakukan join desa. Silahkan lakukan join desa dengan klik tombol disamping <a href="/join-desa" type="button" class="btn btn-xs btn-danger">Join Desa</a>
-                        </div>
+            <div class="col-md-12">
+                <div class="text-center">
+                    <div>
+                        <span style="font-size:100px;" class="mdi mdi-server-security"></span> 
+                    </div>
+
+                    <div style="margin-bottom:10px;">Maaf anda belum melakukan gabung desa. <br> Silahkan lakukan gabung desa dengan klik tombol dibawah ini</div>
+                    <div>
+                        <a href="{{ url('join-desa') }}" type="button" class="btn btn-xs btn-primary">Gabung Desa</a>
                     </div>
                 </div>
             </div>
         </div>
 
         @else
-
+            
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="cards">
                     <div class="card-body">
                         
                         <div style="text-align:center">
 
-                            <span style="font-size:55px;" class="mdi mdi-home-assistant"></span>
+                            <span style="font-size:85px;" class="mdi mdi-home-assistant"></span>
                             <div style="color:#000;">Apakah desa anda memiliki bumdes ?</div>
 
-                            <div class="alert-danger" style="padding:10px;">Beberapa program mengharuskan anda untuk memiliki bumdes <br> yang terdaftar pada KEMENDES.</div>
+                            <div style="padding:10px; color:#000;">Beberapa program mengharuskan anda untuk memiliki bumdes <br> yang terdaftar pada KEMENDES.</div>
 
                             <div style="padding:10px; color:#000;">
                                 <div class="custom-control custom-checkbox">

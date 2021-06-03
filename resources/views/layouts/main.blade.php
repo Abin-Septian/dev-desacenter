@@ -41,16 +41,19 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
+        <div class="nav-header" style="background:#fff !important;">
             <div class="brand-logo">
                 <a href="#">
                     <b>
-                        <img style="width:100px" src="{{ asset('assets/images/dsc_logo.png') }}" alt="">
+                        <img style="width:60px" src="{{ asset('assets/images/dsc_logo.png') }}" alt="">
                     </b>
                 </a>
             </div>
-            <div class="nav-control">
-                <div class="hamburger"><span class="line"></span>  <span class="line"></span>  <span class="line"></span>
+            <div class="nav-control" style="color:#000 !important;">
+                <div style="color:#000 !important;" class="hamburger">
+                    <span style="color:#000 !important;" class="line"></span>  
+                    <span style="color:#000 !important;" class="line"></span>  
+                    <span style="color:#000 !important;" class="line"></span>
                 </div>
             </div>
         </div>
@@ -61,21 +64,31 @@
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header" style="background-color:#fff3cd !important;">    
+        <div class="header" style="background-color:#fff !important;">    
             <div class="header-content">
                 <div class="header-left">
                         {{-- masih kosong --}}
                 </div>
                 <div class="header-right">
                     <ul>
+                        @php
+                        if(strlen($member->nama) > 0)
+                        {
+                            $profil = $member->nama;
+                        }
+                        else
+                        {
+                            $profil = $member->telp;
+                        }
+                        @endphp
                         <li class="icons">
                             <a href="javascript:void(0)" class="log-user">
-                                <span style="color:#000; text-transform:capitalize">{{ $member->nama }}</span>  <i style="color:#000 !important;" class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
+                                <span style="color:#000; text-transform:capitalize">{{ $profil }}</span>  <i style="color:#000 !important;" class="fa fa-caret-down f-s-14" aria-hidden="true"></i>
                             </a>
                             <div class="drop-down dropdown-profile animated bounceInDown">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li><a href="{{ url('/profil/akun') }}"><i style="color:#000 !important;" class="icon-user"></i> <span>Akun Anda</span></a></li>
+                                        <li><a href="{{ url('/profil/akun') }}"><i style="color:#000 !important;" class="mdi mdi-account-circle"></i> <span>Akun Anda</span></a></li>
                                         <li><a href="#" onclick="signOut()"><i style="color:red !important;" class="mdi mdi-power text-danger"></i> Logout</a></li>
                                     </ul>
                                 </div>
@@ -92,7 +105,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="nk-sidebar">           
+        <div class="nk-sidebar" style="top:0px !important;">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu mm-show" id="menu">
                     <li class="nav-label">Dashboard</li>
@@ -126,7 +139,7 @@
                         </a>
                     </li> -->
                     
-                    <li class="">
+                    <li class="sr-only">
                         <a class="" href="{{ url('/program')}}" aria-expanded="false">
                             <i class="mdi mdi-content-copy"></i><span class="nav-text">Program </span>
                             <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
@@ -135,17 +148,17 @@
                         <ul class="submenu mm-collapse mm-show">
                             @foreach($program as $nilai)
                             <li class="">
-                                <a href="javascript:void(0);" aria-expanded="false">{{ $nilai->nama }}  <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
-                                <ul class="submenu mm-collapse" style="height: 0px;">
+                                <a href="{{ url('program/detail/'.$nilai->id) }}" aria-expanded="false">{{ $nilai->nama }}  <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <!-- <ul class="submenu mm-collapse" style="height: 0px;">
                                     <li><a href="javascript:void(0);">Webinar</a></li>
                                     <li><a href="javascript:void(0);">Assesment</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="">
-                        <a class="" href="{{ url('/edukasi')}}" aria-expanded="false">
+                        <a class="" href="javascript:void(0)" onclick="return alert('Fitur ini masih dalam pengembangan')" aria-expanded="false">
                             <i class="mdi mdi-help-circle"></i><span class="nav-text">Webinar / Training</span>
                         </a>
                     </li>

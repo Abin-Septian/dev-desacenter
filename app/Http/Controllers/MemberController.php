@@ -10,7 +10,6 @@ class MemberController extends Controller
 {
     public function __construct(){
 
-
         //SET VARIABLE GLOBAL MASTER DATA
         $this->program = DB::select("SELECT
             a.id as id,
@@ -25,7 +24,7 @@ class MemberController extends Controller
             WHERE a.reff_id = '0'
             GROUP BY a.id
             ORDER BY a.id DESC
-            LIMIT 3
+            LIMIT 5
         ");
 
     }
@@ -35,7 +34,8 @@ class MemberController extends Controller
 
         
        
-        return view('layoutmain.main');
+        return view('layoutmain.landing');
+        // return view('layoutmain.main');
     }
 
 
@@ -157,7 +157,7 @@ class MemberController extends Controller
         $this->uid = $request->session()->get("uid");
 
         $this->member = DB::table("mst_member as a")
-                          ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto")
+                          ->select("a.uid as uid","a.email", "a.id", "a.nama", "a.telp", "a.foto")
                           ->where("a.uid", $this->uid)
                           ->get();
 
@@ -167,21 +167,28 @@ class MemberController extends Controller
                                 "a.id_instansi as id_instansi",
                                 "b.user_entry as entry_desa",
                                 "c.user_entry as entry_bumdes",
+                                "b.nama_kepala as namakepala"
                             )
-                            ->join("mst_instansi as b", "b.id_instansi", "=", "a.id_instansi")
-                            ->join("mst_instansi_det as c", "c.id_instansi", "=", "b.id_instansi")
+                            ->leftJoin("mst_instansi as b", "b.id_instansi", "=", "a.id_instansi")
+                            ->leftJoin("mst_instansi_det as c", "c.id_instansi", "=", "b.id_instansi")
                             ->where("a.uid", $this->uid)
                             ->get()->first();
 
         $statusprofil = (@$this->stepprofil->email != "" ) ? true : false;
         $statusjoindesa = (@$this->stepprofil->id_instansi != 0 ) ? true : false;
-        $statusprofildesa = (@$this->stepprofil->entry_desa != 0 ) ? true : false;
+        $statusprofildesa = (@$this->stepprofil->namakepala != "" ) ? true : false;
         $statusprofilbumdes = (@$this->stepprofil->entry_bumdes != 0 ) ? true : false;
 
+
+        $this->pemesanan = DB::table("trx_pemesanan as a")
+                           ->join("mst_training as b","b.id", "=", "a.id_training")
+                           ->where("a.id_member", $this->member->first()->id)
+                           ->get();
 
         $data = array(
             "member" => $this->member->first(),
             "program" => $this->program,
+            "pemesanan" => $this->pemesanan,
             "step" => array(
                 "profil" => array(
                     "status" => $statusprofil,
@@ -266,9 +273,9 @@ class MemberController extends Controller
                                    ->where("a.id_instansi", $this->member->first()->id_instansi)
                                    ->get();
 
-        if(@$this->checkProfilBumdes->first()->kode_bumdes != "")
+        if(@$this->checkProfilBumdes->first()->nama_bumdes != "")
         {
-            return redirect("profil/info-bumdes")->with("status", "Terima kasih anda sudah melengkapi profil bumdes.");
+            return redirect("profil/info-bumdes")->with("status", "Silahkan lengkapi info bumdes jika belum lengkap.");
             exit();
         }
 
@@ -558,7 +565,6 @@ class MemberController extends Controller
         
 
         $request->validate([
-            "kodebumdes" => "required",
             "namabumdes" => "required",
             "emailbumdes"=> "required",
             "telpbumdes" => "required",
@@ -581,7 +587,7 @@ class MemberController extends Controller
         $this->alamatBumdes = $this->input['alamatbumdes'];
         $this->tahunBerdiri = $this->input['tahun'];
         $this->unitUsaha    = json_encode($this->input['unitusaha']);
-        $this->unitLain     = $this->input['unitlain'];
+        $this->unitLain     = (isset($this->input['unitlain'])) ? $this->input['unitlain'] : "";
         $this->emailBumdes  = $this->input['emailbumdes'];
         $this->telpBumdes   = "+62".$this->input['telpbumdes'];
 
@@ -659,6 +665,222 @@ class MemberController extends Controller
         );
 
         return view("pages.detailprogram")->with($data);
+    }
+
+    public function syaratketentuan(Request $request)
+    {
+        if(!$request->session()->get("uid"))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        $this->idprogram = $request->segment(3);
+
+        $this->uid = $request->session()->get('uid');
+        $this->member = DB::table("mst_member as a")
+                        ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto", "a.id", "a.id_instansi")
+                        ->where("a.uid", $this->uid)
+                        ->get();
+
+        $this->checkPemesanan = DB::table("trx_pemesanan as a")
+                                ->where("a.id_member", $this->member->first()->id)
+                                ->where("a.id_training", $this->idprogram)
+                                ->get();
+
+        if($this->checkPemesanan->count() == 0)
+        {
+            $data = array(
+                "member"    => $this->member->first(),
+                "program"   => $this->program,
+                "idprogram" => $this->idprogram
+            );
+
+            return view("pages.syaratketentuan")->with($data);
+        }
+        else
+        {
+            return redirect("program/success/".$this->idprogram);
+        }
+
+    }
+
+    public function invitepeserta(Request $request)
+    {
+        if(!$request->session()->get("uid"))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        $this->idprogram = $request->segment(3);
+
+        $this->uid = $request->session()->get('uid');
+        $this->member = DB::table("mst_member as a")
+                        ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto", "a.id_instansi")
+                        ->where("a.uid", $this->uid)
+                        ->get();
+
+        $this->peserta = DB::table("mst_member as a")
+                         ->where("a.id_instansi", $this->member->first()->id_instansi)
+                         ->get();
+
+        $data = array(
+            "member"   => $this->member->first(),
+            "program"  => $this->program,
+            "idprogram"  => $this->idprogram,
+            "peserta"  => $this->peserta
+        );
+
+        return view("pages.invite")->with($data);
+    }
+
+    public function tambahpeserta(Request $request)
+    {
+        if(!$request->session()->get("uid"))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+        $this->input = $request->input();
+
+        $this->idmember = $this->input['idpeserta'];
+
+        $this->peserta = DB::table("mst_member as a")
+                         ->where("a.uid", $this->idmember)
+                         ->get()->first();
+
+        $this->response = array(
+            "id" => $this->peserta->id,
+            "nama" => $this->peserta->nama,
+            "email" => $this->peserta->email,
+            "telp" => $this->peserta->telp,
+            "jabatan" => $this->peserta->jabatan
+        );
+
+        echo json_encode($this->response);
+    }
+
+    public function simpanpeserta(Request $request)
+    {
+        if(!$request->session()->get("uid"))
+        {
+            return redirect("/login")->with("status", "Session akun anda habis. Silahkan lakukan login kembali.");
+            exit();
+        }
+
+        $this->input = $request->input();
+
+        $this->program = $this->input['idprogram'];
+
+
+        //check peserta apakah sudah pernah mendaftar
+        foreach($this->input['peserta'] as $peserta)
+        {
+            $this->checkPemesanan = DB::table("trx_pemesanan as a")
+                                ->where("a.id_member", $peserta)
+                                ->where("a.id_training", $this->program)
+                                ->get();
+
+            //JIKA BELUM PERNAH TERDAFTAR MAKA AKAN DISIMPAN DALAM DATABASE
+            if($this->checkPemesanan->count() == 0)
+            {
+                $this->training = DB::table("mst_training as a")
+                              ->where("a.id", $this->program)
+                              ->get()->first();
+
+                $kodeprogram = $this->training->kode;
+                $scramble    = STR_PAD(rand(10,1000),4,"0",STR_PAD_LEFT);
+
+                $kodepemesanan = $kodeprogram.$scramble;
+
+                $kodeunik = rand(1, 999);
+
+                DB::table("trx_pemesanan")
+                ->insert([
+                    "id_member"       => $peserta,
+                    "id_training"     => $this->program,
+                    "kode_pemesanan"  => $kodepemesanan,
+                    "kode_unik"       => $kodeunik,
+                    "status"          => "aktif",
+                    "tanggal"         => date("Y-m-d H:i:s"),
+                    "tanggal_expired" => date('Y-m-d H:i:s', strtotime("+1 day"))
+                ]);
+            }
+        }
+
+        $this->response = array(
+            "status" => true
+        );
+
+        echo json_encode($this->response);
+        
+    }
+
+    public function success(Request $request)
+    {
+
+        $this->idprogram = $request->segment(3);
+        
+
+        $this->uid = $request->session()->get('uid');
+        $this->member = DB::table("mst_member as a")
+                        ->select("a.uid as uid","a.email", "a.nama", "a.id", "a.telp", "a.foto", "a.id_instansi")
+                        ->where("a.uid", $this->uid)
+                        ->get();
+
+        //CHECK MEMBER JIKA MELAKUKAN BYPASS
+        $this->pemesanan = DB::table("trx_pemesanan as a")
+                           ->where("a.id_training", $this->idprogram)
+                           ->where("a.id_member", $this->member->first()->id)
+                           ->get();
+
+        if($this->pemesanan->count() == 0)
+        {
+            return redirect("program/detail/".$this->idprogram)->with("status","Anda belum mendaftar program. Silahkan daftarkan diri anda sekarang.");
+            exit();
+        }
+        
+
+        $this->peserta = DB::table("trx_pemesanan as a")
+                         ->join("mst_member as b", "a.id_member","=","b.id")
+                         ->where("a.id_training", $this->idprogram)
+                         ->where("b.id_instansi", $this->member->first()->id_instansi)
+                         ->get();
+
+        $data = array(
+            "member"   => $this->member->first(),
+            "program"  => $this->program,
+            "peserta"  => $this->peserta,
+            "idprogram"=> $this->idprogram
+        );
+
+        return view("pages.success")->with($data);
+    }
+
+    public function formkesediaan(Request $request)
+    {
+        $this->idprogram = $request->segment(3);
+
+        $this->uid = $request->session()->get('uid');
+        $this->member = DB::table("mst_member as a")
+                        ->select("a.uid as uid","a.email", "a.nama", "a.telp", "a.foto", "a.id_instansi")
+                        ->where("a.uid", $this->uid)
+                        ->get();
+
+        $this->peserta = DB::table("trx_pemesanan as a")
+                         ->join("mst_member as b", "a.id_member","=","b.id")
+                         ->where("a.id_training", $this->idprogram)
+                         ->where("b.id_instansi", $this->member->first()->id_instansi)
+                         ->get();
+
+        $data = array(
+            "member"   => $this->member->first(),
+            "program"  => $this->program,
+            "peserta"  => $this->peserta
+        );
+
+        return view("pages.formkesediaan")->with($data);
     }
 
     public function ikutprogram(Request $request)

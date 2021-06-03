@@ -97,6 +97,7 @@ class AuthController extends Controller
                   "telp"       => $this->input['telp'],
                   "uid"        => $this->input['uid'],
                   "pin"        => $this->getuniqpin,
+                  "status"     => "aktif",
                   "date_entry" => date("Y-m-d H:i:s")
               ]);
 
@@ -129,9 +130,8 @@ class AuthController extends Controller
         else
         {
             $pin = $pin;
+            return $pin;
         }
-
-        return $pin;
     }
 
     public function authLogin__(Request $request)

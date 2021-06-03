@@ -31,7 +31,7 @@
 ***********************************-->
 <div class="content-body">
     <div class="container-fluid">
-        <div class="row page-titles" style="margin-bottom:4rem !important; background:#ffd656 !important;">
+        <div class="row page-titles" style="margin-bottom:4rem !important; background:#f3f6f9 !important;">
             <div class="col p-0">
                 <h5>Profil Desa</h5>
             </div>
@@ -47,16 +47,15 @@
 
         @if($member->id_instansi == 0)
         <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="alert alert-danger" style="font-size:14px;">
-                            Silahkan untuk melakukan gabug desa agar dapat melengkapi profil desa.
-                        </div>
+            <div class="col-md-12">
+                <div class="text-center">
+                    <div>
+                        <span style="font-size:100px;" class="mdi mdi-server-security"></span> 
+                    </div>
 
-                        <div class="text-center">
-                            <a href="{{ url('join-desa') }}" type="button" class="btn btn-primary">Gabung Desa</a>
-                        </div>
+                    <div style="margin-bottom:10px;">Anda belum menjadi anggota desa. <br> Silahkan untuk melakukan gabung desa agar dapat melengkapi profil desa..</div>
+                    <div>
+                        <a href="{{ url('join-desa') }}" type="button" class="btn btn-xs btn-primary">Gabung Desa</a>
                     </div>
                 </div>
             </div>

@@ -30,6 +30,7 @@
 
     .box-steps{
         border:0px solid #ccc;
+        width:100%;
     }
 
     .dot{
@@ -39,8 +40,8 @@
         position:absolute;
         top:6px;
         background:#fff;
-        z-index:99;
-        
+        z-index:9;
+        left:10px;
     }
     
     .border-dot{
@@ -73,25 +74,30 @@
     }
 
     .box-program{
-        border-radius:8px;
+        border-radius:5px;
         overflow: hidden;
         box-shadow:1px 1px 10px #ccc;
-        background:#fff3cd !important;
-        padding:5px 0px;
+        background:#fff !important;
+        padding:8px 0px;
     }
 
     .text-addon{
         text-align:left;
         color:#555;
-        font-size:13px;
+        font-size:14px;
     }
+
+    .text-step{
+        border-right:2px solid #f9f9f9;
+    }
+
 </style>
 <!--**********************************
     Content body start
 ***********************************-->
 <div class="content-body">
     <div class="container-fluid">
-        <div class="row page-titles" style="margin-bottom:4rem !important; background:#ffd656 !important;">
+        <div class="row page-titles" style="margin-bottom:4rem !important; background:#f3f6f9 !important;">
             <div class="col p-0">
                 <h5>Dashboard</h5>
             </div>
@@ -117,69 +123,72 @@
                     <div class="card-body">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="row">
-                                <div class="col-lg-8">
+                                <div class="col-lg-12">
                                     <h5>Selamat, Datang <span style="text-transform:uppercase">{{ $member->nama }}</span> !</h5>
-
+                                    
+                                    
                                     <div class="rows">
                                         <div class="box-step">
                                             <div style="color:#000;">Silahkan lengkapi profil Berikut ini : </div>
                                             @php
-                                                $step1 = ($step['profil']['status'] == true) ? "green" : "red";
-                                                $step2 = ($step['joindesa']['status'] == true) ? "green" : "red";
-                                                $step3 = ($step['profildesa']['status'] == true) ? "green" : "red";
-                                                $step4 = ($step['profilbumdes']['status'] == true) ? "green" : "red";
+                                                $step1 = ($step['profil']['status'] == true) ? "#48bc48" : "#ff906f";
+                                                $step2 = ($step['joindesa']['status'] == true) ? "#48bc48" : "#ff906f";
+                                                $step3 = ($step['profildesa']['status'] == true) ? "#48bc48" : "#ff906f";
+                                                $step4 = ($step['profilbumdes']['status'] == true) ? "#48bc48" : "#ff906f";
 
                                                 
                                             @endphp
                                             <div class="box-steps">
-                                                <div class="d-flex flex-row bd-highlight mb-3">
+                                                <div class="d-flex flex-column flex-md-row justify-content-between bd-highlight mb-3">
                                                     <div class="bd-highlight box-steps">
                                                         <div class="box-relative">
-                                                            <div style="left:25px;" class="dot"></div>
+                                                            <div class="dot"></div>
                                                             <div class="border-dot"></div>
                                                         </div>
                                                         <div style="clear:both;"></div>
-                                                        <div style="background:<?php echo $step1 ?>;" class="text-step">Profil</div> 
+                                                        <div class="text-step" style="background:<?php echo $step1 ?>;" class="text-step">Profil Pengguna</div> 
                                                     </div>
                                                     <div class="bd-highlight box-steps">
                                                         <div class="box-relative">
-                                                            <div style="left:45px;" class="dot"></div>
+                                                            <div class="dot"></div>
                                                             <div class="border-dot"></div>
                                                         </div>
                                                         <div style="clear:both;"></div>
-                                                        <div style="background:<?php echo $step2 ?>;" class="text-step">Join Desa</div>
+                                                        <div class="text-step" style="background:<?php echo $step2 ?>;" class="text-step">Join Desa</div>
                                                     </div>
                                                     <div class="bd-highlight box-steps">
                                                         <div class="box-relative">
-                                                            <div style="left:40px;" class="dot"></div>
+                                                            <div class="dot"></div>
                                                             <div class="border-dot"></div>
                                                         </div>
                                                         <div style="clear:both;"></div>
-                                                        <div style="background:<?php echo $step3 ?>;" class="text-step text-center">Profil Desa</div> 
+                                                        <div class="text-step" style="background:<?php echo $step3 ?>;" class="text-step text-center">Profil Desa</div> 
                                                     </div>
                                                     <div class="bd-highlight box-steps">
                                                         <div class="box-relative">
-                                                            <div style="left:45px;" class="dot"></div>
+                                                            <div class="dot"></div>
                                                             <div class="border-dot"></div>
                                                         </div>
                                                         <div style="clear:both;"></div>
-                                                        <div style="background:<?php echo $step4 ?>;" class="text-step">Profil Bumdes</div> 
+                                                        <div class="text-step" style="background:<?php echo $step4 ?>;" class="text-step">Profil Bumdes</div> 
                                                     </div>
                                                     <div class="bd-highlight box-steps" style="padding:10px;">
-                                                        <a type="button" href="{{ url('profil/akun') }}" class="btn btn-xs btn-info">Lengkapi Profil</a>
+                                                        <a type="button" href="{{ url('profil/akun') }}" class="btn btn-xs btn-info">Lengkapi Akun</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+
+                                <div class="sr-only col-lg-12">
                                     <h5>Kelengkapan Dokumen</h5>
 
                                     <div class="alert alert-danger" style="font-size:14px;">
                                         Anda belum melengkapi dokumen Surat Kesediaan. 
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -193,132 +202,124 @@
                     <div class="card-body">
                         <div class="row" style="border-bottom:1px dashed #ccc; margin-bottom:15px;">
                             <div class="col-lg-6">
-                                <h5 style="font-size:13px;">Addon Program</h5>
+                                <h5>Addon Program</h5>
                             </div>
                             <div class="col-lg-6 text-right">
                                 <a style="font-size:13px;" href="#">Lihat Semua</a>
                             </div>
                         </div>
 
-                        <div class="row">
+                        
                         @if(count($program) > 0)
                             @foreach($program as $dataprogram)
-                            
-                            <div class="col-lg-4">
-                                <div class="box-program">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="box-poster text-center">
-                                                <img class="rounded-circle" src="{{ $dataprogram->banner }}" style="width:60px; height:60px;"/>
-                                            </div>
-                                              
-                                        </div>
-                                        <div class="col-lg-8" style="padding-left:0px;">
-                                            <div style="padding:5px;">
-                                                <div class="text-addon">{{ $dataprogram->nama }}</div>
-                                                <div class="text-addon">
-                                                     
-                                                    <span class="mdi mdi-calendar-clock"></span>
-                                                    Tanggal
-                                                    {{ date("d M Y", strtotime($dataprogram->tanggal)) }}
-                                                    
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="box-program">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <div class="box-poster text-center">
+                                                    <img class="rounded-circle" src="{{ $dataprogram->banner }}" style="width:70px; height:70px;"/>
                                                 </div>
-                                                <div class="text-addon">
-                                                    
-                                                    <span class="mdi mdi-account-circle"></span>
-                                                    Yang mengikuti
-                                                    {{ $dataprogram->jml }} Peserta
+                                                
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div style="padding:5px;">
+                                                    <div class="text-addon">{{ $dataprogram->nama }}</div>
+                                                    <div class="text-addon">
+                                                        
+                                                        <span class="mdi mdi-calendar-clock"></span>
+                                                        Tanggal
+                                                        {{ date("d M Y", strtotime($dataprogram->tanggal)) }}
+                                                        
+                                                    </div>
+                                                    <div class="text-addon">
+                                                        
+                                                        <span class="mdi mdi-account-circle"></span>
+                                                        Yang mengikuti
+                                                        {{ $dataprogram->jml }} Peserta
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                            <div class="col-lg-2 text-center">
 
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
-                                            <a type="button" href="{{ url('program/detail/'.$dataprogram->id) }}" style="padding:2px 10px;">Ikuti Program</a>
+                                                
+                                                <a type="button" style="margin-top:20px;" href="{{ url('program/detail/'.$dataprogram->id) }}" class="btn btn-xs btn-info">Ikuti Program</a>
+                                            </div>
                                         </div>
+
+                                        
+                                        
                                     </div>
-                                    
                                 </div>
                             </div>
-                            
+                            <br>
                             @endforeach
                         @else
                             kosong
                         @endif
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-5">
+
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <h5>Data Profil</h5>
-                                <div class="form-horizontal">
-                                    <div class="form-group" style="margin:0px;">
-                                        <label style="margin:0px; font-weight:500; font-size:14px; color:#000;">Uid [otomatis sistem] : </label>
-                                        <div style="color:#666;">{{ $member->uid }}</div>
-                                    </div>
-                                    <div class="form-group" style="margin:0px;">
-                                        <label style="margin:0px; font-weight:500; font-size:14px; color:#000;">Telepon : </label>
-                                        <div style="color:#666;">{{ $member->telp }}</div>
-                                    </div>
-                                    <div class="form-group" style="margin:0px;">
-                                        <label style="margin:0px; font-weight:500; font-size:14px; color:#000;">Nama User : </label>
-                                        <div style="color:#666;">{{ $member->nama }}</div>
-                                    </div>
-                                    <div class="form-group" style="margin:0px;">
-                                        <label style="margin:0px; font-weight:500; font-size:14px; color:#000;">Email User : </label>
-                                        <div style="color:#666;">{{ $member->email }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                            @if( $member->foto != "" )
-                                <img id="img" style="width:100px;height:100px; border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('storage/upload/'.$member->foto)) }}" data-holder-rendered="true">
-                            @else
-                                <img id="img" style="width:100px;height:100px; border:1px solid #ccc;" class="rounded-circle" alt="200x200" src="{{ (asset('assets/images/user-4.jpg')) }}" data-holder-rendered="true">
-                            @endif
-                            </div>
-                        </div>
+                        <h5>Program yang anda ikuti</h5>
                         <br>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="alert-danger text-small">
-                                            Silahkan update profil anda jika anda belum mengisi data profil.
+                            
+                        @if($pemesanan->count() == 0)
+                            <div style="text-align:center;">
+                                <div><span class="mdi mdi-server-off" style="font-size:60px;"></span></div>
+                                <div>Anda belum mengikuti program apapun. <br> Silahkan untuk mengikuti program yang ada.</div>
+                            </div>
+                        @else
+                            
+                            <div class="row">
+                            @foreach($pemesanan as $pesan)
+                                <div class="col-lg-6">
+                                    <div class="box-program">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="box-poster text-center">
+                                                    <img class="rounded-circle" src="{{ $pesan->banner }}" style="width:70px; height:70px;"/>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div style="padding:5px;">
+                                                    <div class="text-addon"><b>{{ $pesan->nama }}</b></div>
+                                                    <div class="text-addon">
+                                                        <span class="mdi mdi-view-list"></span>
+                                                        Kode Pemesanan <b>{{ $pesan->kode_pemesanan }}</b>
+                                                    </div>
+                                                    <div class="text-addon">
+                                                        
+                                                        <span class="mdi mdi-calendar-clock"></span>
+                                                        Telah Mendaftar pada tanggal
+                                                        <span style="color:green; font-weight:bold;">{{ date("d M Y", strtotime($pesan->tanggal)) }}</span>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <a type="button" href="{{ url('program/form/'.$pesan->id_training) }}" class="btn btn-xs btn-info">Lihat Form Kesediaan</a>
+                                            </div>
+                                            
                                         </div>
                                     </div>
-                                    <!--<div class="col-lg-4">
-                                        <a href="{{ url('profil/akun') }}" type="button" class="btn btn-xs btn-info">Edit Profil</a>
-                                    </div>-->
                                 </div>
+                            @endforeach
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            
-
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Webinar / Training</h5>
-                        <div>Belum ada Webinar</div>
+                        @endif
                     </div>
                 </div>
 
                 
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <h5>Perlu Bantuan ?</h5>
